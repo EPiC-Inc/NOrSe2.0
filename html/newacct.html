@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src='/js/jquery.js'></script>
+  <script src='/js/socket.io.js'></script>
+  <link rel="shortcut icon" type="image/png" href="/img/favicon.png"/>
+  <link href='./css/core.css' rel='stylesheet'>
+  <link href='./css/dark.css' id='theme' rel='stylesheet'>
+  <title>NOS</title>
+</head>
+
+<body>
+  <header>
+    New Account
+  </header>
+
+  <div id="content" class='center'>
+    <br style='height:24px'>
+
+    <form onsubmit="return false" id='login' class='center'>
+      <h3 style='color:red' id='errors'></h3>
+
+      <h3>Username:</h3>
+      <input id='user' type='text' /><br><br>
+      <h3>Password:</h3>
+      <input id='pass' type='password' /><br><br>
+      <h3>Repeat Password:</h3>
+      <input id='passVerify' type='password' /><br><br>
+
+      <h3>Secret Join Code:</h3>
+      <input id='joincode' type='password' /><br><br>
+      <button onclick="newAccount()">Register</button><br><br>
+    </form>
+
+    <a href='./login.html'>Log In</a><br><br><br>
+  </div>
+</body>
+
+<script src='/js/themechanger.js'></script>
+<script src='/js/includehtml.js'></script>
+<script src='/js/auth.js'></script>
+</html>

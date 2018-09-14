@@ -1,0 +1,56 @@
+/* WHEN MAKING A NEW THEME, DO NOT CHANGE ANYTHING IN HERE */
+
+body {
+  margin: 0;
+}
+
+button {
+  font-size: 24px;
+}
+
+.center {
+  text-align: center;
+}
+
+#content {
+  margin-bottom: 80px;
+  margin-left: 1%;
+  margin-top: 80px;
+}
+
+header {
+  font-size: 48px;
+  padding-left: 1%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+header button {
+  font-size: 24px;
+  height: 48px;
+  margin-top: -24px;
+  padding-bottom: 4px;
+  position: absolute;
+  top: 50%;
+}
+
+header .right {
+  float: right;
+  right: 2%;
+}
+
+#msgForm {
+  bottom: 0;
+  padding: 4px 0px;
+  position: fixed;
+  width: 100%;
+}
+
+#msgSender {
+  border-radius: 20px;
+  font-size: 20px;
+  margin-right: .5%;
+  padding: 4px 8px;
+  width: 90%;
+}

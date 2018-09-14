@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src='/js/jquery.js'></script>
+  <script src='/js/socket.io.js'></script>
+  <link rel="shortcut icon" type="image/png" href="/img/favicon.png"/>
+  <link href='./css/core.css' rel='stylesheet'>
+  <link href='./css/dark.css' id='theme' rel='stylesheet'>
+  <title>NOS</title>
+</head>
+
+<body>
+  <header>
+    Welcome, <span id='username'></span>!
+
+    <button onclick='logout();' class='right'>Log Out</button>
+  </header>
+
+
+  <div id="content">
+    <div id='msgs'>
+
+    </div>
+  
+    <form id='msgForm' onsubmit="return false">
+      <input id='msgSender' autocomplete="off" /><button onclick="sendMsg()">Send</button>
+    </form>
+  </div>
+</body>
+
+<script src='/js/themechanger.js'></script>
+<script src='/js/includehtml.js'></script>
+<script src='/js/chat.js'></script>
+</html>
