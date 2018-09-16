@@ -65,7 +65,7 @@ if (getCookie("username")) {
 socket.on('a-ok', function(data){
   console.log('a-ok received');
   errors.innerHTML = '';
-  if (alreadyLoggedIn) {
+  if (!alreadyLoggedIn) {
     document.cookie='username='+data;
     document.cookie='key='+hashCode(passwd.value);
     alreadyLoggedIn = false;
