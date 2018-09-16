@@ -50,6 +50,7 @@ socket.emit('auth', [user.value, hashCode(passwd.value)]);
 function logout() {
   rmCookie('username');
   rmCookie('key');
+  window.location.replace("/coms.html");
 }
 
 
