@@ -1,6 +1,7 @@
 {"lobby":{
+  "admins":["System"],
   "blacklist":[],
   "name":"Lobby",
-  "owner":"_System"
+  "owner":"System"
   }
 }
