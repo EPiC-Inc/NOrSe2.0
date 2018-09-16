@@ -59,7 +59,7 @@ var toLocalTime = function() {
 // Set the port (node server.js [port])
 // process.argv : 0:program 1:file 2:(in this case)port
 if (process.argv[2] == undefined) {
-  var port = 8080;
+  var port = 80;
 } else {
   var port = process.argv[2]; // Use node server.js [port]
 }
