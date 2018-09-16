@@ -99,7 +99,7 @@ io.on('connection', function(socket){
   //console.log('conn');
   /// End connection startup scripts
   socket.on('disconnect', function(){
-    
+
   });
 
   socket.on('auth', function(data){
@@ -169,8 +169,8 @@ io.on('connection', function(socket){
 /// End socketio
 
 /// Start the server
-/*
+
 http.listen(port, function(){
   console.log('Listening on port:'+port);
-});*/
+});
 /// And that's it.
