@@ -133,7 +133,7 @@ io.on('connection', function(socket){
     //console.log(joincode_attempt);
     //console.log(configs);
 
-    if (!(user) || pass == 1)) {
+    if (!(user) || pass == 1) {
       io.to(socket.id).emit('err', "Username / Password can\'t be blank!");
     }
     else if (authList[user]) {
