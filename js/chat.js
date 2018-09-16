@@ -3,11 +3,21 @@ var socket = io();
 var msgSender = document.getElementById('msgSender');
 var username = '';
 
+var rmCookie = function(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+
 function sendMsg(msg) {
   if (msgSender.value.trim() !== '') {
     socket.emit('message', '['+username+'] '+msgSender.value);
     msgSender.value = '';
   }
+}
+
+function logout() {
+  rmCookie('username');
+  rmCookie('key');
+  window.location.replace("/coms.html");
 }
 
 if (getCookie("username")) {

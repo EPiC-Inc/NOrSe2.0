@@ -54,7 +54,6 @@ function logout() {
 }
 
 
-
 if (getCookie("username")) {
   username = getCookie("username");
   password = getCookie("key");
