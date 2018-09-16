@@ -17,7 +17,7 @@ function sendMsg(msg) {
 function logout() {
   rmCookie('username');
   rmCookie('key');
-  window.location.replace("/coms.html");
+  window.location.replace("/index.html");
 }
 
 if (getCookie("username")) {
