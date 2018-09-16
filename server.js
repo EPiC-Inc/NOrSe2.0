@@ -59,7 +59,7 @@ var toLocalTime = function() {
 // Set the port (node server.js [port])
 // process.argv : 0:program 1:file 2:(in this case)port
 if (process.argv[2] == undefined) {
-  var port = process.env.PORT || 5000;
+  var port = process.env.PORT || 80;
 } else {
   var port = process.argv[2]; // Use node server.js [port]
 }
@@ -99,7 +99,6 @@ io.on('connection', function(socket){
   //console.log('conn');
   /// End connection startup scripts
   socket.on('disconnect', function(){
-
   });
 
   socket.on('auth', function(data){
@@ -120,6 +119,10 @@ io.on('connection', function(socket){
     } else {
       io.to(socket.id).emit('err', "Username not found");
     }
+  });
+
+  socket.on('join', function(data){
+    // Code for joining a room
   });
 
   socket.on('new user', function(data){

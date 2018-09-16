@@ -3,6 +3,7 @@ var socket = io();
 var user = document.getElementById('user');
 var passwd = document.getElementById('pass');
 var errors = document.getElementById('errors');
+var alreadyLoggedIn = false
 
 /// Functions
 function hashCode(s) {
@@ -36,8 +37,8 @@ function newAccount() {
     errors.innerHTML = "Error: No spaces allowed in username!"
   }
   else if (passwd.value === document.getElementById('passVerify').value) {
-    socket.emit('new user', [user.value, 
-    hashCode(passwd.value), 
+    socket.emit('new user', [user.value,
+    hashCode(passwd.value),
     document.getElementById('joincode').value])
   }
 }
@@ -56,6 +57,7 @@ function logout() {
 if (getCookie("username")) {
   username = getCookie("username");
   password = getCookie("key");
+  alreadyLoggedIn = true;
   socket.emit('auth', [username, password]);
 }
 
@@ -63,8 +65,11 @@ if (getCookie("username")) {
 socket.on('a-ok', function(data){
   console.log('a-ok received');
   errors.innerHTML = '';
-  document.cookie='username='+data;
-  document.cookie='key='+hashCode(passwd.value);
+  if (alreadyLoggedIn) {
+    document.cookie='username='+data;
+    document.cookie='key='+hashCode(passwd.value);
+    alreadyLoggedIn = false;
+  }
   window.location.replace("/coms.html");
 });
 
