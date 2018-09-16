@@ -1,3 +1,10 @@
+var socket = io();
+
+var roomButton1 = '<button onclick=\'socket.emit("join", [' // + username
+var roomButton2 = ', "' // + room ID
+var roomButton3 = '"]);\'>' // + room name
+var roomButton4 = '</button>'
+
 function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -13,3 +20,30 @@ function getCookie(cname) {
     }
     return "";
 }
+
+var rmCookie = function(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+function logout() {
+  rmCookie('username');
+  rmCookie('key');
+  window.location.replace("/index.html");
+}
+
+if (getCookie("username")) {
+  username = getCookie("username");
+  document.getElementById('username').innerHTML = username;
+  //password = getCookie("key");
+  //socket.emit('auth', [username, password]);
+} else {
+  window.location.replace("/login.html");
+}
+
+socket.emit('get rooms', username);
+
+socket.on('user rooms', function(data){
+  for (room in data) {
+    buttonPacket = roomButton1 + username + roomButton2 + data[0] + roomButton3 + data[1] + roomButton4;
+    $("#content").append(buttonPacket);
+});

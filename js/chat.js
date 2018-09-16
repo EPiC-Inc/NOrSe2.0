@@ -21,7 +21,7 @@ function getCookie(cname) {
 
 var rmCookie = function(name) {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-};
+}
 
 function sendMsg(msg) {
   if (msgSender.value.trim() !== '') {
@@ -40,7 +40,7 @@ if (getCookie("username")) {
   username = getCookie("username");
   document.getElementById('username').innerHTML = username;
   password = getCookie("key");
-  socket.emit('join', [username, password]);
+  //socket.emit('auth', [username, password]);
 } else {
   window.location.replace("/login.html");
 }
