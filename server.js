@@ -126,6 +126,7 @@ io.on('connection', function(socket){
     for (room in authList[data]['rooms']) {
       rep.push([room, rooms[room]]);
     }
+    io.to(socket.id).emit('user rooms', rep);
   });
 
   socket.on('join', function(data){
