@@ -51,6 +51,10 @@ header .right {
   width: 100%;
 }
 
+#msgForm button {
+  padding-left: 0;
+}
+
 #msgSender {
   border-radius: 20px;
   font-size: 20px;
