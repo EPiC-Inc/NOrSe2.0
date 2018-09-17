@@ -128,7 +128,7 @@ io.on('connection', function(socket){
       room = authList[data]['rooms'][i];
       console.log(room);
       console.log(rooms[room]);
-      rep.push([room, rooms[room]]);
+      rep.push([room, rooms[room]['name']]);
     }
     io.to(socket.id).emit('user rooms', rep);
   });
