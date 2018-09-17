@@ -18,6 +18,10 @@ button {
   margin-top: 80px;
 }
 
+#content button {
+  padding-left: 32px;
+}
+
 header {
   font-size: 48px;
   padding-left: 1%;
