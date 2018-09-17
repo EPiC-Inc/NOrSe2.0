@@ -123,7 +123,9 @@ io.on('connection', function(socket){
 
   socket.on('get rooms', function(data){
     rep = [];
-    for (room in authList[data]['rooms']) {
+    console.log(authList[data]['rooms']);
+    for (i in authList[data]['rooms']) {
+      room = authList[data]['rooms'][i];
       console.log(room);
       console.log(rooms[room]);
       rep.push([room, rooms[room]]);
