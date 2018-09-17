@@ -45,6 +45,17 @@ if (getCookie("username")) {
   window.location.replace("/login.html");
 }
 
+socket.emit('get rooms', username);
+
+socket.on('user rooms', function(data){
+  for (i in data) {
+    room = data[i];
+    buttonPacket = roomButton1 + username + roomButton2 + room[0] + roomButton3 + room[1] + roomButton4;
+    $("#menu").append(buttonPacket);
+    console.log(buttonPacket);
+  }
+});
+
 socket.on('message', function(data){
   $("#msgs").append("<div class='msg'>"+data+"</div>");
   window.scrollTo(0,document.body.scrollHeight);
