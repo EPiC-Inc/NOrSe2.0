@@ -3,5 +3,12 @@
   "blacklist":[],
   "messages":[],
   "name":"Lobby",
-  "owner":"System"}
+  "owner":"System"},
+  "test":{
+    "admins":[],
+    "blacklist":[],
+    "messages":[],
+    "name":"Test",
+    "owner":""
+  }
 }
