@@ -44,7 +44,6 @@ socket.emit('get rooms', username);
 
 socket.on('user rooms', function(data){
   console.log(data);
-  data.splice(-1,1);
   for (room in data) {
     buttonPacket = roomButton1 + username + roomButton2 + data[0] + roomButton3 + data[1] + roomButton4;
     $("#content").append(buttonPacket);
