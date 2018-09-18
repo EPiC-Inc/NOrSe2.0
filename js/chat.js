@@ -8,24 +8,39 @@ var roomButton2 = '", "' // + room ID
 var roomButton3 = '"]);\'>' // + room name
 var roomButton4 = '</button>'
 
+function openNavLeft() {
+  document.getElementById("users").style.width = "250px";
+  document.getElementById("content").style.marginLeft = "250px";
+}
+function openNavRight() {
+  document.getElementById("rooms").style.width = "250px";
+  document.getElementById("content").style.marginRight = "250px";
+}
+function closeNav() {
+  document.getElementById("users").style.width = "0";
+  document.getElementById("rooms").style.width = "0";
+  document.getElementById("content").style.marginLeft= "0";
+  document.getElementById("content").style.marginRight= "0";
+}
+
 function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
     }
-    return "";
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
 
 var rmCookie = function(name) {
-    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
 function sendMsg(msg) {
