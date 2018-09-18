@@ -64,9 +64,8 @@ header .right {
 }
 
 /* Stuff for the fancy menu */
-.sidenav-left {
+.sidenav {
   height: 100%;
-  left: 0;
   overflow-x: hidden;
   position: fixed;
   padding-top: 60px;
@@ -74,18 +73,15 @@ header .right {
   transition: 0.5s;
   width: 0;
   z-index: 1;
+  font-size: 25px;
+}
+
+.sidenav-left {
+  left: 0;
 }
 
 .sidenav-right {
-  height: 100%;
-  overflow-x: hidden;
-  position: fixed;
-  padding-top: 60px;
   right: 0;
-  top: 0;
-  transition: 0.5s;
-  width: 0;
-  z-index: 1;
 }
 
 .sidenav a {
