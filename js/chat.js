@@ -66,7 +66,7 @@ socket.emit('get rooms', username);
 socket.on('user rooms', function(data){
   for (i in data) {
     room = data[i];
-    buttonPacket = roomButton1 + username + roomButton2 + room[0] + roomButton3 + room[1] + roomButton4 + "<br>";
+    buttonPacket = roomButton1 + username + roomButton2 + room[0] + roomButton3 + room[1] + roomButton4 + "<br><br>";
     $("#rooms").append(buttonPacket);
     console.log(buttonPacket);
   }
