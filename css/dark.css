@@ -50,3 +50,18 @@ header {
   background: silver;
   border: 3px inset darkgrey;
 }
+
+/* Stuff for the fancy menu */
+.sidenav {
+    background-color: #111;
+}
+
+.sidenav a {
+    color: #818181;
+    text-decoration: none;
+}
+
+.sidenav a:hover {
+    background:darkgrey;
+    color: #f1f1f1;
+}
