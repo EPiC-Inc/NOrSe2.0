@@ -10,17 +10,13 @@ var roomButton4 = '</button>'
 
 function openNavLeft() {
   document.getElementById("users").style.width = "250px";
-  document.getElementById("content").style.marginLeft = "250px";
 }
 function openNavRight() {
   document.getElementById("rooms").style.width = "250px";
-  document.getElementById("content").style.marginRight = "250px";
 }
 function closeNav() {
   document.getElementById("users").style.width = "0";
   document.getElementById("rooms").style.width = "0";
-  document.getElementById("content").style.marginLeft= "0";
-  document.getElementById("content").style.marginRight= "0";
 }
 
 function getCookie(cname) {
