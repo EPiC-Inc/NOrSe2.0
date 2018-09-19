@@ -72,6 +72,10 @@ socket.on('user rooms', function(data){
   }
 });
 
+socket.on('connected', function(){
+  console.log('connected');
+  document.getElementById('choose_room_message').visibility.hidden = true;
+
 socket.on('message', function(data){
   $("#msgs").append("<div class='msg'>"+data+"</div>");
   window.scrollTo(0,document.body.scrollHeight);
