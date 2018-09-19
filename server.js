@@ -172,7 +172,7 @@ io.on('connection', function(socket){
     if (!(user) || pass == 1) {
       io.to(socket.id).emit('err', "Username / Password can\'t be blank!");
     }
-    else if (authList[user] || user == configs.superuser) {
+    else if (authList[user] || user.toLowerCase() == configs.superuser.toLowerCase()) {
       io.to(socket.id).emit('err', "Error: Username already in use!");
     }
 
