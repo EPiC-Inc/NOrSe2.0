@@ -131,12 +131,19 @@ io.on('connection', function(socket){
   });
 
   socket.on('get rooms', function(data){
-    rep = [];
-    for (i in authList[data]['rooms']) {
-      room = authList[data]['rooms'][i];
-      rep.push([room, rooms[room]['name']]);
+    if (authList[data]) {
+      rep = [];
+      for (i in authList[data]['rooms']) {
+        room = authList[data]['rooms'][i];
+        rep.push([room, rooms[room].name]);
+      }
+      io.to(socket.id).emit('user rooms', rep);
+    } else if (data == configs.superuser) {
+      rep = [];
+      for (room in rooms) {
+        rep.push([room, rooms[room].name]);
+      }
     }
-    io.to(socket.id).emit('user rooms', rep);
   });
 
   socket.on('join', function(data){
