@@ -95,6 +95,10 @@ app.use(function(req, res) {
 io.on('connection', function(socket){
   /// Anything done upon establishing a connection
   //console.log('conn');
+  users[socket.id] = {
+    name: '',
+    room: ''
+  }
   /// End connection startup scripts
   socket.on('disconnect', function(){
     delete users[socket.id];
@@ -136,10 +140,8 @@ io.on('connection', function(socket){
     if (!(roomname && rooms[roomname])) {
       // haha error catching
     } else {
-      users[socket.id] = {
-        name: username,
-        room: roomname
-      }
+      users[socket.id].name = username;
+      users[socket.id].room = roomname;
       socket.join(roomname);
       io.to(socket.id).emit('connected', roomname);
     }
