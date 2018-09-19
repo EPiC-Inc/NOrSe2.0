@@ -72,8 +72,8 @@ socket.on('user rooms', function(data){
   }
 });
 
-socket.on('connected', function(){
-  console.log('connected');
+socket.on('connected', function(data){
+  console.log('connected to '+data);
   document.getElementById('choose_room_message').style.visibility='hidden';
 });
 
