@@ -189,8 +189,10 @@ io.on('connection', function(socket){
 
   /// MESSAGES
   socket.on('message', function(data){
-    data = data.split('>').join('&gt;').split('<').join('&lt;'); // lol
-    io.to(users[socket.id].room).emit('message', data);
+    if (users[socket.id] && users[socket.id].room) {
+      data = data.split('>').join('&gt;').split('<').join('&lt;'); // lol
+      io.to(users[socket.id].room).emit('message', data);
+    }
   });
 });
 /// End socketio
