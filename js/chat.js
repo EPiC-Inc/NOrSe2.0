@@ -82,3 +82,13 @@ socket.on('message', function(data){
   $("#msgs").append("<div class='msg'>"+data+"</div>");
   window.scrollTo(0,document.body.scrollHeight);
 });
+
+socket.on("disconnect", function(reason){
+  if (online) {
+    online = false;
+    $("#msgs").append("<div class='msg'>! Connection terminated. !</div>");
+    window.scrollTo(0,document.body.scrollHeight);
+  	changeIco('/static/disconnect.png');
+    console.log(reason);
+  }
+});
