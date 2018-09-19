@@ -151,7 +151,7 @@ io.on('connection', function(socket){
     // Code for joining a room
     username = data[0];
     roomname = data[1];
-    if (!(roomname && rooms[roomname]) || authList[username].rooms.includes(roomname)) {
+    if (!(roomname && rooms[roomname]) || (username != configs.superuser && authList[username].rooms.includes(roomname))) {
       // haha error catching
     } else {
       users[socket.id].name = username;
