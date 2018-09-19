@@ -99,6 +99,7 @@ io.on('connection', function(socket){
   //console.log('conn');
   /// End connection startup scripts
   socket.on('disconnect', function(){
+    delete users[socket.id];
   });
 
   socket.on('auth', function(data){
@@ -132,6 +133,18 @@ io.on('connection', function(socket){
 
   socket.on('join', function(data){
     // Code for joining a room
+    username = data[0];
+    roomname = data[1];
+    if (!(roomname && rooms[roomname])) {
+      // haha error catching
+    } else {
+      users[socket.id] = {
+        name: username,
+        room: roomname
+      }
+      socket.join(roomname);
+      io.to(socket.id).emit('message', "> Welcome to "+roomname);
+    }
   });
 
   socket.on('new user', function(data){
