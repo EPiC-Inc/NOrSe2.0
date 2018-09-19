@@ -117,8 +117,14 @@ io.on('connection', function(socket){
     }
     if (authList[user] && authList[user]['password'] == pass) {
       io.to(socket.id).emit('a-ok', user);
-    } else if (authList[data[0]]) {
+    } else if (authList[user]) {
       io.to(socket.id).emit('err', 'Incorrect password');
+    } else if(user.toLowerCase() == configs.superuser.toLowerCase()) {
+      if (pass == configs.superuserpassword) {
+        io.to(socket.id).emit('a-ok', configs.superuser);
+      } else {
+        io.to(socket.id).emit('err', 'Incorrect password');
+      }
     } else {
       io.to(socket.id).emit('err', "Username not found");
     }
@@ -158,7 +164,7 @@ io.on('connection', function(socket){
     if (!(user) || pass == 1) {
       io.to(socket.id).emit('err', "Username / Password can\'t be blank!");
     }
-    else if (authList[user]) {
+    else if (authList[user] || user == configs.superuser) {
       io.to(socket.id).emit('err', "Error: Username already in use!");
     }
 
