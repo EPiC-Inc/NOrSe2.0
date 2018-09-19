@@ -188,6 +188,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('message', function(data){
+    console.log('message');
     io.to(users[socket.id].room).emit('message', data);
   });
 });
