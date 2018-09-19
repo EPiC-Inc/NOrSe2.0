@@ -75,17 +75,17 @@ header .right {
   padding-top: 60px;
   top: 0;
   transition: 0.5s;
-  width: 0;
+  width: 250px;
   z-index: 1;
   font-size: 25px;
 }
 
 .sidenav-left {
-  left: 0;
+  left: -250px;
 }
 
 .sidenav-right {
-  right: 0;
+  right: -250px;
 }
 
 .sidenav a {
