@@ -41,7 +41,7 @@ var rmCookie = function(name) {
 
 function sendMsg(msg) {
   if (msgSender.value.trim() !== '') {
-    //socket.emit('message', '['+username+'] '+msgSender.value);
+    socket.emit('message', '['+username+'] '+msgSender.value);
     msgSender.value = '';
   }
 }
