@@ -143,6 +143,7 @@ io.on('connection', function(socket){
       for (room in rooms) {
         rep.push([room, rooms[room].name]);
       }
+      io.to(socket.id).emit('user rooms', rep);
     }
   });
 
