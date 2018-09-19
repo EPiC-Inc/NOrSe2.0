@@ -1,5 +1,3 @@
-// Refactored version of server.js
-
 /// Dependencies - don't need to worry too much about these
 var express = require('express');
 var app = express();
@@ -143,7 +141,7 @@ io.on('connection', function(socket){
         room: roomname
       }
       socket.join(roomname);
-      io.to(socket.id).emit('connected');
+      io.to(socket.id).emit('connected', roomname);
     }
   });
 
