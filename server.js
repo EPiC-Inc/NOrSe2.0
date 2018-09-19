@@ -143,7 +143,7 @@ io.on('connection', function(socket){
         room: roomname
       }
       socket.join(roomname);
-      io.to(socket.id).emit('message', "> Welcome to "+roomname);
+      io.to(socket.id).emit('connected');
     }
   });
 
@@ -188,7 +188,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('message', function(data){
-    io.emit('message', data)
+    io.to(users[socket.id].room).emit('message', data);
   });
 });
 /// End socketio
