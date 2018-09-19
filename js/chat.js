@@ -64,6 +64,8 @@ if (getCookie("username")) {
 
 socket.emit('get rooms', username);
 
+socket.emit('join', [username, 'lobby']);
+
 socket.on('user rooms', function(data){
   for (i in data) {
     room = data[i];
@@ -76,7 +78,6 @@ socket.on('user rooms', function(data){
 socket.on('connected', function(data){
   document.getElementById('msgs').innerHTML = '';
   console.log('connected to '+data);
-  document.getElementById('choose_room_message').innerHTML = '';
 });
 
 socket.on('message', function(data){
