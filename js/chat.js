@@ -5,7 +5,7 @@ var username = '';
 
 var roomButton1 = '<button onclick=\'socket.emit("join", ["' // + username
 var roomButton2 = '", "' // + room ID
-var roomButton3 = '"]);\'>' // + room name
+var roomButton3 = '"]);closeNav();\'>' // + room name
 var roomButton4 = '</button>'
 
 function openNavLeft() {
