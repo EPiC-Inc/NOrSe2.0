@@ -10,14 +10,14 @@ var roomButton3 = '"]);closeNav();\'>' // + room name
 var roomButton4 = '</button>'
 
 function openNavLeft() {
-  document.getElementById("users").style.width = "250px";
+  document.getElementById("users").style.left = "0";
 }
 function openNavRight() {
-  document.getElementById("rooms").style.width = "250px";
+  document.getElementById("rooms").style.right = "0";
 }
 function closeNav() {
-  document.getElementById("users").style.width = "0";
-  document.getElementById("rooms").style.width = "0";
+  document.getElementById("users").style.left = "-255px";
+  document.getElementById("rooms").style.right = "-255px";
 }
 
 function getCookie(cname) {
