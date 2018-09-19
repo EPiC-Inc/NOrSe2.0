@@ -12,6 +12,10 @@ button {
   text-align: center;
 }
 
+#choose_room_message {
+  font-size: 24px;
+}
+
 #content {
   margin-bottom: 80px;
   margin-left: 1%;
