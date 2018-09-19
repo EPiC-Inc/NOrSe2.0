@@ -75,7 +75,7 @@ socket.on('user rooms', function(data){
 socket.on('connected', function(data){
   document.getElementById('msgs').innerHTML = '';
   console.log('connected to '+data);
-  document.getElementById('choose_room_message').style.visibility='hidden';
+  document.getElementById('choose_room_message').innerHTML = '';
 });
 
 socket.on('message', function(data){
