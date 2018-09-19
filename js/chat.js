@@ -74,7 +74,7 @@ socket.on('user rooms', function(data){
 
 socket.on('connected', function(){
   console.log('connected');
-  document.getElementById('choose_room_message').visibility.hidden = true;
+  document.getElementById('choose_room_message').style.visibility='hidden';
 });
 
 socket.on('message', function(data){
