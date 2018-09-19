@@ -187,8 +187,9 @@ io.on('connection', function(socket){
     }
   });
 
+  /// MESSAGES
   socket.on('message', function(data){
-    console.log('message');
+    io.emit('message', 'test');
     io.to(users[socket.id].room).emit('message', data);
   });
 });
