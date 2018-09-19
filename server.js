@@ -187,7 +187,7 @@ io.on('connection', function(socket){
 
   /// MESSAGES
   socket.on('message', function(data){
-    io.emit('message', data);
+    io.emit('message', data+" [test:"+users[socket.id].room+']');
   });
 });
 /// End socketio
