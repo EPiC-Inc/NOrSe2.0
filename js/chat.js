@@ -4,7 +4,7 @@ var msgSender = document.getElementById('msgSender');
 var username = '';
 var online = true;
 
-var roomButton1 = '<button onclick=\'socket.emit("join", ["' // + username
+var roomButton1 = '<button style=\'margin-top:8px;\' onclick=\'socket.emit("join", ["' // + username
 var roomButton2 = '", "' // + room ID
 var roomButton3 = '"]);closeNav();\'>' // + room name
 var roomButton4 = '</button>'
@@ -73,7 +73,7 @@ socket.emit('join', [username, 'lobby']);
 socket.on('user rooms', function(data){
   for (i in data) {
     room = data[i];
-    buttonPacket = roomButton1 + username + roomButton2 + room[0] + roomButton3 + room[1] + roomButton4 + "<br style='height:4px'><br style='height:4px'>";
+    buttonPacket = roomButton1 + username + roomButton2 + room[0] + roomButton3 + room[1] + roomButton4 + "<br>";
     $("#rooms").append(buttonPacket);
     console.log(buttonPacket);
   }
