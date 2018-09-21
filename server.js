@@ -184,7 +184,7 @@ io.on('connection', function(socket){
       users[socket.id].name = username;
       users[socket.id].room = roomname;
       socket.join(roomname);
-      io.to(socket.id).emit('connected', roomname);
+      io.to(socket.id).emit('connected', [rooms[roomname].name, roomname]);
     }
   });
 
