@@ -80,8 +80,12 @@ socket.on('user rooms', function(data){
 });
 
 socket.on('connected', function(data){
+  roomname = data[0];
+  roomid = data[1];
   document.getElementById('msgs').innerHTML = '';
   console.log('connected to '+data);
+  document.getElementById('roomname').innerHTML = roomname;
+  document.getElementById('roomid').innerHTML = roomid;
 });
 
 socket.on('message', function(data){
