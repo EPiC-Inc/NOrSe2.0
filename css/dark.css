@@ -38,6 +38,14 @@ header {
   background: darkcyan;
 }
 
+form input {
+  border-radius: 24px;
+  font-size: 24px;
+  height: 32px;
+  padding: 0px 8px;
+  width: 384px;
+}
+
 #login input {
   border-radius: 24px;
   font-size: 24px;
