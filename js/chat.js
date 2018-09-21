@@ -73,7 +73,7 @@ socket.emit('join', [username, 'lobby']);
 socket.on('user rooms', function(data){
   for (i in data) {
     room = data[i];
-    buttonPacket = roomButton1 + username + roomButton2 + room[0] + roomButton3 + room[1] + roomButton4 + "<br><br height='4px'>";
+    buttonPacket = roomButton1 + username + roomButton2 + room[0] + roomButton3 + room[1] + roomButton4 + "<br><br style='height:4px'>";
     $("#rooms").append(buttonPacket);
     console.log(buttonPacket);
   }
