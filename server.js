@@ -13,6 +13,7 @@ var commands = require('./commands.js');
 var authList = require('./users.json');
 var rooms = require('./rooms.json');
 var configs = require('./configs.json');
+var roomKeys = require('./invite_codes.json');
 
 var users = {};
 /// End vars
@@ -145,6 +146,31 @@ io.on('connection', function(socket){
       }
       io.to(socket.id).emit('user rooms', rep);
     }
+  });
+
+  socket.on('new room', function(data){
+    username = data[0];
+    roomname = data[1];
+    roomUID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    while (rooms[roomUID]) {
+      roomUID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    }
+    roomKey = Math.random().toString(36).substring(2, 8);
+    while (roomKeys[roomKey]) {
+      roomKey = Math.random().toString(36).substring(2, 8);
+    }
+    rooms[roomUID] = {
+      "admins":[],
+      "blacklist":[],
+      "messages":[],
+      "name":roomname,
+      "owner":username
+    };
+    roomKeys[roomKey] = roomUID;
+    authList[username].rooms.push(roomUID);
+    saveJSON('rooms.json', rooms);
+    saveJSON('invite_codes.json', roomKeys);
+    io.to(socket.id).emit('a-ok', rep);
   });
 
   socket.on('join', function(data){
