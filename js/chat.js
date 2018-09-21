@@ -9,10 +9,10 @@ var roomButton2 = '", "' // + room ID
 var roomButton3 = '"]);closeNav();\'>' // + room name
 var roomButton4 = '</button>'
 
-function openNavLeft() {
+function openUsers() {
   document.getElementById("users").style.left = "0";
 }
-function openNavRight() {
+function openRooms() {
   document.getElementById("rooms").style.right = "0";
 }
 function closeNav() {
