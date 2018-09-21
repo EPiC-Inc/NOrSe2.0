@@ -12,6 +12,9 @@ var roomButton4 = '</button>'
 function openUsers() {
   document.getElementById("users").style.left = "0";
 }
+function openSettings() {
+  document.getElementById("settings").style.left = "0";
+}
 function openRooms() {
   document.getElementById("rooms").style.right = "0";
 }
