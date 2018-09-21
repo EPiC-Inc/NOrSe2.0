@@ -170,6 +170,7 @@ io.on('connection', function(socket){
     authList[username].rooms.push(roomUID);
     saveJSON('rooms.json', rooms);
     saveJSON('invite_codes.json', roomKeys);
+    saveJSON('users.json', authList);
     io.to(socket.id).emit('a-ok', rep);
   });
 
