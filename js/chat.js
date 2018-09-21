@@ -20,6 +20,7 @@ function openRooms() {
 }
 function closeNav() {
   document.getElementById("users").style.left = "-255px";
+  document.getElementById("settings").style.left = "-255px";
   document.getElementById("rooms").style.right = "-255px";
 }
 
