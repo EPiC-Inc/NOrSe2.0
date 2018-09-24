@@ -45,7 +45,7 @@ function newAccount() {
 }
 
 function login() {
-socket.emit('auth', [user.value, hashCode(passwd.value)]);
+  socket.emit('auth', [user.value, hashCode(passwd.value)]);
 }
 
 function logout() {
