@@ -1,5 +1,5 @@
 # NOrSe
-This is the second rendition of the original chat client Novus Ordo Secloreum. Features of it include:
+This is the second rendition of the original chat client Novus Ordo Seclorum. Features of it include:
 * Self-hostable chat server
 * Built-in radio function using webamp
 * A streamlined UI (definitely better than previous version?)
