@@ -8,22 +8,22 @@ This is the second rendition of the original chat client Novus Ordo Secloreum. F
 
 ## Requirements:
 Node.js:
-`sudo apt-get install nodejs`
+* `sudo apt-get install nodejs`
 Express, Socket.io, and the sanitize-html packages:
-`npm install --save express socket.io sanitize-html`
+* `npm install --save express socket.io sanitize-html`
 
-##Downloading:
+## Downloading:
 `git clone https://github.com/EPiC-Inc/nos-alpha.git`
 
-##Starting the Server
+## Starting the Server
 1). Create the file `users.json` if it does not yet already exist
 2). Using node to run the `server.js` file provides the easiest method to start the server.
 `node server.js [port]` (port is optional, it defaults to port 80)
 
-##Updating:
+## Updating:
 `git pull origin master`
 
-##To-Do:
+## To-Do:
 * Create more efficient theme system
 * Implement UI redesign
 * Implement Webamp (https://github.com/captbaritone/webamp)
