@@ -148,6 +148,28 @@ io.on('connection', function(socket){
     }
   });
 
+  socket.on('room settings', function(){
+    if (users[socket.id] && users[socket.id].room && rooms[users[socket.id].room]) {
+      userRoom = rooms[users[socket.id].room]
+      if (userRoom.owner == users[socket.id].name) {
+        // allow access
+        rep = ''
+        for (key in roomKeys) {
+          if (roomKeys[key] == users[socket.id].room) {
+            rep = key;
+            break
+          }
+        }
+        io.to(socket.id).emit('');//todo
+      } else {
+        // disallow
+        io.to(socket.id).emit('settings confirm', "Sorry, you need to be the owner to change room settings.");
+      }
+    } else {
+      io.to(socket.id).emit('settings confirm', "Sorry, You don't appear to be in a room!");
+    }
+  });
+
   socket.on('new room', function(data){
     username = data[0];
     roomname = data[1];
@@ -171,7 +193,7 @@ io.on('connection', function(socket){
     saveJSON('rooms.json', rooms);
     saveJSON('invite_codes.json', roomKeys);
     saveJSON('users.json', authList);
-    io.to(socket.id).emit('a-ok', rep);
+    io.to(socket.id).emit('a-ok');
   });
 
   socket.on('join', function(data){
@@ -231,8 +253,9 @@ io.on('connection', function(socket){
   /// MESSAGES
   socket.on('message', function(data){
     if (users[socket.id] && users[socket.id].room) {
-      data = data.split('>').join('&gt;').split('<').join('&lt;'); // lol
-      packet = "<div class='msg'>"+data+"</div>";
+      // mebbe add encryption
+      packet = '[' + users[socket.id].name + '] ' + data;
+      packet = packet.split('>').join('&gt;').split('<').join('&lt;'); // lol
       io.to(users[socket.id].room).emit('message', packet);
     }
   });

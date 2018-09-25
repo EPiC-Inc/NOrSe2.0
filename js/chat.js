@@ -16,6 +16,7 @@ function openUsers() {
   document.getElementById("users").style.right = "0";
 }
 function openSettings() {
+  io.emit('room settings');
   document.getElementById("settings").style.right = "0";
 }
 function openRooms() {
@@ -50,7 +51,7 @@ var rmCookie = function(name) {
 
 function sendMsg(msg) {
   if (msgSender.value.trim() !== '') {
-    socket.emit('message', '['+username+'] '+msgSender.value);
+    socket.emit('message', msgSender.value);
     msgSender.value = '';
   }
 }
