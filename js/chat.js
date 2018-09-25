@@ -103,7 +103,9 @@ socket.on("disconnect", function(reason){
     online = false;
     $("#msgs").append("<div class='msg'>! Connection terminated. !</div>");
     window.scrollTo(0,document.body.scrollHeight);
-  	changeIco('/static/disconnect.png');
+  	//changeIco('/static/disconnect.png');
+    document.getElementById('roomname').innerHTML = '-';
+    document.getElementById('roomid').innerHTML = 'disconnected';
     console.log(reason);
   }
 });
