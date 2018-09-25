@@ -13,7 +13,7 @@ Express, Socket.io, and the sanitize-html packages:
 * `npm install --save express socket.io sanitize-html`
 
 ## Downloading:
-`git clone https://github.com/EPiC-Inc/nos-alpha.git`
+`git clone https://github.com/EPiC-Inc/NOrSe.git`
 
 ## Starting the Server
 1). Create the file `users.json` if it does not yet already exist
