@@ -16,7 +16,7 @@ function openUsers() {
   document.getElementById("users").style.right = "0";
 }
 function openSettings() {
-  io.emit('room settings');
+  socket.emit('room settings');
   document.getElementById("settings").style.right = "0";
 }
 function openRooms() {
