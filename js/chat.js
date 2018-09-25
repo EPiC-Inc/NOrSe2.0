@@ -9,18 +9,22 @@ var roomButton2 = '", "' // + room ID
 var roomButton3 = '"]);closeNav();\'>' // + room name
 var roomButton4 = '</button>'
 
+function openMenu() {
+  document.getElementById("other_stuff").style.right = '0';
+}
 function openUsers() {
-  document.getElementById("users").style.left = "0";
+  document.getElementById("users").style.right = "0";
 }
 function openSettings() {
-  document.getElementById("settings").style.left = "0";
+  document.getElementById("settings").style.right = "0";
 }
 function openRooms() {
   document.getElementById("rooms").style.right = "0";
 }
 function closeNav() {
-  document.getElementById("users").style.left = "-255px";
-  document.getElementById("settings").style.left = "-255px";
+  document.getElementById("other_stuff").style.right = '-255px';
+  document.getElementById("users").style.right = "-255px";
+  document.getElementById("settings").style.right = "-255px";
   document.getElementById("rooms").style.right = "-255px";
 }
 

@@ -7,16 +7,16 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link href='./css/core.css' rel='stylesheet'>
   <link href='./css/dark.css' id='theme' rel='stylesheet'>
-  <title>NOS</title>
+  <title>NOS2</title>
 </head>
 
 <body>
   <header>
-    <button onclick="openUsers();">Users</button>
-    <button style='margin-left:100px;' onclick="openSettings();"><i class="material-icons" style="font-size:32px;">settings</i></button>
-    <span style='margin-left:164px;'>Username : <span id='username'></span></span>
+    <!--<button onclick="openUsers();">Users</button>-->
+    <button onclick="openMenu();" class='right' style='padding:0px;margin-right:140px;'><i class="material-icons" style="font-size:39px;">settings</i></button>
+    <span>Username : <span id='username'></span></span>
 
-    <button onclick="openRooms();" class="right" style='margin-right:128px;'>Rooms</button>
+    <!--<button onclick="openRooms();" class="right" style='margin-right:128px;'>Rooms</button>-->
     <button onclick='logout();' class='right'>Log Out</button>
   </header>
 
@@ -26,11 +26,24 @@
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <br><span>Your rooms:</span><br>
     </div>
-    <div id="users" class="sidenav sidenav-left">
+
+    <div id="users" class="sidenav sidenav-right">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <br><span>Users online:</span><br>
     </div>
-    <div id="settings" class="sidenav sidenav-left">
+
+    <div id="other_stuff" class="sidenav sidenav-right">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <br><span style='font-size:48px;'>Menu:</span>
+      <a href='./newroom.html'>Create a Room</a>
+      <a href='javascript:void(0)' onclick=''>Join a Room</a>
+      <a href='javascript:void(0)' onclick='closeNav();openUsers();'>Users Online</a>
+      <a href='javascript:void(0)' onclick='closeNav();openRooms();'>Your Rooms</a>
+      <a href='javascript:void(0)' onclick=''>Room Settings</a>
+      <span><a href='./settings.html'>Account Settings</a></span>
+    </div>
+
+    <div id="settings" class="sidenav sidenav-right">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <br><span>Settings:</span><br>
     </div>

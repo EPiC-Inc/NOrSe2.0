@@ -232,7 +232,8 @@ io.on('connection', function(socket){
   socket.on('message', function(data){
     if (users[socket.id] && users[socket.id].room) {
       data = data.split('>').join('&gt;').split('<').join('&lt;'); // lol
-      io.to(users[socket.id].room).emit('message', data);
+      packet = "<div class='msg'>"+data+"</div>";
+      io.to(users[socket.id].room).emit('message', packet);
     }
   });
 });

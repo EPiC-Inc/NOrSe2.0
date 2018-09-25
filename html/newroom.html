@@ -1,3 +1,4 @@
+<!-- Someone tell me why we need an extra page for this instead of just popping it in with coms.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,7 @@
   <link rel="shortcut icon" type="image/png" href="/img/favicon.png"/>
   <link href='./css/core.css' rel='stylesheet'>
   <link href='./css/dark.css' id='theme' rel='stylesheet'>
-  <title>NOS</title>
+  <title>NOS2</title>
 </head>
 
 <body>
@@ -17,7 +18,7 @@
 
   <div id="content" class='center'>
     <h1>New room</h1>
-    <form>
+    <form onsubmit="return false;">
       <input type='text' id='roomname' /><br><br>
       <button onclick="addRoom();" type='submit'>Create room</button>
     </form>
