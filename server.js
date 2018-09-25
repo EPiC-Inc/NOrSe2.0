@@ -163,10 +163,10 @@ io.on('connection', function(socket){
         io.to(socket.id).emit('');//todo
       } else {
         // disallow
-        io.to(socket.id).emit('settings confirm', "Sorry, you need to be the owner to change room settings.");
+        io.to(socket.id).emit('settings confirm', [1, "Sorry, you need to be the owner to change room settings."]);
       }
     } else {
-      io.to(socket.id).emit('settings confirm', "Sorry, You don't appear to be in a room!");
+      io.to(socket.id).emit('settings confirm', [1, "Sorry, You don't appear to be in a room!"]);
     }
   });
 
