@@ -104,6 +104,7 @@ socket.on('message', function(data){
 });
 
 socket.on('settings confirm', function(data){
+  console.log(data);
   document.getElementById("settings").innerHTML = '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br><span style="font-size:48px;">Settings:</span><br>'
   if (data[0] == 1) {
     document.getElementById("settings").innerHTML += "<br><span>"+data[1]+"</span>";
