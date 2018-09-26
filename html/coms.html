@@ -31,9 +31,10 @@
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <br><span>Join a Room</span><br><br>
       <form style='margin-left:0px;padding-left:0px;' onsubmit='return false;'>
-        <input type='text' style='width:90px;' maxlength="6" /><br><br>
-        <button onclick=''>Join</button>
+        <input type='text' id='roomkey' style='width:90px;' maxlength="6" /><br><br>
+        <button onclick='joinRoom();'>Join</button><br><br>
       </form>
+      <span id='err' style='color:red'></span>
     </div>
 
     <div id="users" class="sidenav sidenav-right">
