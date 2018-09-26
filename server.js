@@ -199,9 +199,13 @@ io.on('connection', function(socket){
       username = users[socket.id].name;
       roomUID = roomKeys[data];
       if (roomUID) {
-        authList[username].rooms.push(roomUID);
-        saveJSON('users.json', authList);
-        io.to(socket.id).emit('err', "<span style='color:blue'>Success!</span>");
+        if (! authList[username].rooms.includes(roomUID) {
+          authList[username].rooms.push(roomUID);
+          saveJSON('users.json', authList);
+          io.to(socket.id).emit('err', "<span style='color:blue'>Success!</span>");
+        } else {
+          io.to(socket.id).emit('err', "Already joined");
+        }
       } else {
         io.to(socket.id).emit('err', "Invalid key");
       }
