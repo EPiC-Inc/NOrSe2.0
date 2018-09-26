@@ -187,6 +187,7 @@ io.on('connection', function(socket){
         while (roomKeys[roomKey]) {
           roomKey = Math.random().toString(36).substring(2, 8);
         }
+        roomKeys[roomKey] = userRoom;
         io.to(socket.id).emit('settings confirm', [0, [roomKey]]);//todo
       }
     }
