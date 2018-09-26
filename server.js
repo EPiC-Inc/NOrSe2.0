@@ -256,7 +256,9 @@ io.on('connection', function(socket){
   socket.on('message', function(data){
     if (users[socket.id] && users[socket.id].room) {
       // mebbe add encryption
-      packet = '[' + users[socket.id].name + '] ' + data;
+      senderName = users[socket.id].name;
+      senderNamePacket = "<a href='javascript:void(0);' onclick=''>"+senderName+"</a>"
+      packet = '[' + senderNamePacket + '] ' + data;
       packet = packet.split('>').join('&gt;').split('<').join('&lt;'); // lol
       io.to(users[socket.id].room).emit('message', packet);
     }
