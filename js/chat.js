@@ -103,6 +103,14 @@ socket.on('message', function(data){
   window.scrollTo(0,document.body.scrollHeight);
 });
 
+socket.on('settings confirm', function(data){
+  if (data[0] == 1) {
+    document.getElementById("settings").innerHTML += "<br><span>"+data[1]+"</span>";
+  } else {
+    // format settings, put them in settings div
+  }
+});
+
 socket.on("disconnect", function(reason){
   if (online) {
     online = false;
