@@ -104,12 +104,13 @@ socket.on('message', function(data){
 });
 
 socket.on('settings confirm', function(data){
+  document.getElementById("settings").innerHTML = '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br><span>Settings:</span><br>'
   if (data[0] == 1) {
     document.getElementById("settings").innerHTML += "<br><span>"+data[1]+"</span>";
   } else {
     // format settings, put them in settings 
     dataPak = data[1];
-    settingsPacket = "<br><span>Join Key:</span><br><br>"+dataPak+"<br><br><span><button onclick=''>Reroll</button></span>";
+    settingsPacket = "<br><span>Join Key:</span><br><br><span>"+dataPak+"</span><br><br><button onclick=''>Reroll</button>";
     document.getElementById("settings").innerHTML += settingsPacket;
   }
 });
