@@ -59,7 +59,7 @@ form input {
 }
 .msg .name:hover {
   color: silver;
-  background: darkgrey;
+  background: #111;
 }
 
 #msgSender {
