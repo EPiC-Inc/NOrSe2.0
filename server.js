@@ -185,6 +185,7 @@ io.on('connection', function(socket){
         }
         io.to(socket.id).emit('new key', Math.random().toString(36).substring(2, 8));
       }
+    }
   });
 
   socket.on('new room', function(data){
