@@ -55,6 +55,11 @@ var rmCookie = function(name) {
   document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
+function joinRoom() {
+  roomkey = document.getElementById('roomkey').value;
+  socket.emit('add room', roomkey);
+}
+
 function sendMsg(msg) {
   if (msgSender.value.trim() !== '') {
     socket.emit('message', msgSender.value);
@@ -99,6 +104,10 @@ socket.on('connected', function(data){
   document.getElementById('roomid').innerHTML = roomid;
 });
 
+socket.on('err', function(data){
+  document.getElementByID('err').innerHTML = data;
+});
+
 socket.on('message', function(data){
   $("#msgs").append("<div class='msg'>"+data+"</div>");
   window.scrollTo(0,document.body.scrollHeight);
@@ -112,7 +121,7 @@ socket.on('settings confirm', function(data){
   } else {
     // format settings, put them in settings 
     dataPak = data[1];
-    settingsPacket1 = "<br><span>Room:</span>"+roomname+"</span><br>";
+    settingsPacket1 = "<br><span>Room:</span>"+roomname+"</span><br><br>";
     settingsPacket2 = "<span>Join Key:</span><br><br><span>"+dataPak+"</span><br><br><button onclick='socket.emit(\"reroll room key\");'>Reroll</button>";
     document.getElementById("settings").innerHTML += settingsPacket1 + settingsPacket2;
   }
