@@ -196,13 +196,14 @@ io.on('connection', function(socket){
 
   socket.on('add room', function(data){
     if (users[socket.id] && users[socket.id].name) {
-      roomUID = roomKeys[data]
+      username = users[socket.id].name;
+      roomUID = roomKeys[data];
       if (roomUID) {
         authList[username].rooms.push(roomUID);
         saveJSON('users.json', authList);
-        io.to(socket.id).emit('err', "<span style='color:blue'>Invalid room key</span>");
+        io.to(socket.id).emit('err', "<span style='color:blue'>Success!</span>");
       } else {
-        io.to(socket.id).emit('err', "Invalid room key");
+        io.to(socket.id).emit('err', "Invalid key");
       }
     } else {
       io.to(socket.id).emit('err', "{error}");
