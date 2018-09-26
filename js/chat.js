@@ -22,6 +22,9 @@ function openSettings() {
 function openRooms() {
   document.getElementById("rooms").style.right = "0";
 }
+function openJoin() {
+  document.getElementById("join_room").style.right = "0";
+}
 function closeNav() {
   document.getElementById("other_stuff").style.right = '-255px';
   document.getElementById("users").style.right = "-255px";
