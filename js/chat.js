@@ -109,10 +109,3 @@ socket.on("disconnect", function(reason){
     console.log(reason);
   }
 });
-
-// Close the menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (! (event.target.matches('.sidenav') || event.target.matches('.right')) ) {
-    closeNav();
-  }
-}
