@@ -162,7 +162,7 @@ io.on('connection', function(socket){
             break
           }
         }
-        io.to(socket.id).emit('');//todo
+        io.to(socket.id).emit('settings confirm', [0, [rep]]);//todo
       } else {
         // disallow
         io.to(socket.id).emit('settings confirm', [1, "Sorry, you need to be the owner to change room settings."]);
@@ -170,6 +170,21 @@ io.on('connection', function(socket){
     } else {
       io.to(socket.id).emit('settings confirm', [1, "Sorry, You don't appear to be in a room!"]);
     }
+  });
+  
+  socket.on('reroll room key', function(){
+    if (users[socket.id] && users[socket.id].room && rooms[users[socket.id].room]) {
+      userRoom = rooms[users[socket.id].room]
+      if (userRoom.owner == users[socket.id].name) {
+        // reroll key
+        for (key in roomKeys) {
+          if (roomKeys[key] == users[socket.id].room) {
+            delete roomKeys[key];
+            break
+          }
+        }
+        io.to(socket.id).emit('new key', Math.random().toString(36).substring(2, 8));
+      }
   });
 
   socket.on('new room', function(data){
