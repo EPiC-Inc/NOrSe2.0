@@ -136,7 +136,9 @@ io.on('connection', function(socket){
       rep = [];
       for (i in authList[data]['rooms']) {
         room = authList[data]['rooms'][i];
-        rep.push([room, rooms[room].name]);
+        if (rooms[room]) {
+          rep.push([room, rooms[room].name]);
+        }
       }
       io.to(socket.id).emit('user rooms', rep);
     } else if (data == configs.superuser) {
