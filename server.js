@@ -257,9 +257,11 @@ io.on('connection', function(socket){
     if (users[socket.id] && users[socket.id].room) {
       // mebbe add encryption
       senderName = users[socket.id].name;
+      senderName = senderName.split('>').join('&gt;').split('<').join('&lt;');
       senderNamePacket = "<a href='javascript:void(0);' onclick=''>"+senderName+"</a>"
+
+      data = data.split('>').join('&gt;').split('<').join('&lt;'); // lol
       packet = '[' + senderNamePacket + '] ' + data;
-      packet = packet.split('>').join('&gt;').split('<').join('&lt;'); // lol
       io.to(users[socket.id].room).emit('message', packet);
     }
   });
