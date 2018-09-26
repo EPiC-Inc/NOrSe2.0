@@ -54,6 +54,14 @@ form input {
   width: 384px;
 }
 
+.msg .name {
+  color: darkgrey;
+}
+.msg .name:hover {
+  color: silver;
+  background: darkgrey;
+}
+
 #msgSender {
   background: silver;
   border: 3px inset darkgrey;
