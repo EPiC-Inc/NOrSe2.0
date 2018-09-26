@@ -188,8 +188,24 @@ io.on('connection', function(socket){
           roomKey = Math.random().toString(36).substring(2, 8);
         }
         roomKeys[roomKey] = users[socket.id].room;
+        saveJSON('invite_codes.json', roomKeys);
         io.to(socket.id).emit('settings confirm', [0, [roomKey]]);//todo
       }
+    }
+  });
+
+  socket.on('add room', function(data){
+    if (users[socket.id] && users[socket.id].name) {
+      roomUID = roomKeys[data]
+      if (roomUID) {
+        authList[username].rooms.push(roomUID);
+        saveJSON('users.json', authList);
+        io.to(socket.id).emit('err', "<span style='color:blue'>Invalid room key</span>");
+      } else {
+        io.to(socket.id).emit('err', "Invalid room key");
+      }
+    } else {
+      io.to(socket.id).emit('err', "{error}");
     }
   });
 
