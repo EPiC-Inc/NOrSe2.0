@@ -183,7 +183,11 @@ io.on('connection', function(socket){
             break
           }
         }
-        io.to(socket.id).emit('new key', Math.random().toString(36).substring(2, 8));
+        roomKey = Math.random().toString(36).substring(2, 8);
+        while (roomKeys[roomKey]) {
+          roomKey = Math.random().toString(36).substring(2, 8);
+        }
+        io.to(socket.id).emit('settings confirm', [0, [roomKey]]);//todo
       }
     }
   });
