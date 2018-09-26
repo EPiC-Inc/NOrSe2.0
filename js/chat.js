@@ -110,7 +110,7 @@ socket.on('settings confirm', function(data){
   } else {
     // format settings, put them in settings 
     dataPak = data[1];
-    settingsPacket = "<br><span>Join Key:</span><br><br><span>"+dataPak+"</span><br><br><button onclick=''>Reroll</button>";
+    settingsPacket = "<br><span>Join Key:</span><br><br><span>"+dataPak+"</span><br><br><button onclick='socket.emit(\"reroll room key\");'>Reroll</button>";
     document.getElementById("settings").innerHTML += settingsPacket;
   }
 });
