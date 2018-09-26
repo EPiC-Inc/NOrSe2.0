@@ -2,6 +2,7 @@ var socket = io();
 
 var msgSender = document.getElementById('msgSender');
 var username = '';
+var roomname = '';
 var online = true;
 
 var roomButton1 = '<button style=\'margin-top:8px;\' onclick=\'socket.emit("join", ["' // + username
@@ -105,14 +106,15 @@ socket.on('message', function(data){
 
 socket.on('settings confirm', function(data){
   console.log(data);
-  document.getElementById("settings").innerHTML = '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br><span style="font-size:48px;">Settings:</span><br>'
+  document.getElementById("settings").innerHTML = '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br><span style="font-size:40px;">Settings:</span><br>'
   if (data[0] == 1) {
     document.getElementById("settings").innerHTML += "<br><span>"+data[1]+"</span>";
   } else {
     // format settings, put them in settings 
     dataPak = data[1];
-    settingsPacket = "<br><span>Join Key:</span><br><br><span>"+dataPak+"</span><br><br><button onclick='socket.emit(\"reroll room key\");'>Reroll</button>";
-    document.getElementById("settings").innerHTML += settingsPacket;
+    settingsPacket1 = "<br><span>Room:</span>"+roomname+"</span><br>";
+    settingsPacket2 = "<span>Join Key:</span><br><br><span>"+dataPak+"</span><br><br><button onclick='socket.emit(\"reroll room key\");'>Reroll</button>";
+    document.getElementById("settings").innerHTML += settingsPacket1 + settingsPacket2;
   }
 });
 
