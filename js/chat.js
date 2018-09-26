@@ -109,7 +109,7 @@ socket.on('settings confirm', function(data){
   } else {
     // format settings, put them in settings 
     dataPak = data[1];
-    settingsPacket = "<br><span>Join Key:</span><br><br>"+dataPak+"<br><br><button onclick=''>Reroll</button>";
+    settingsPacket = "<br><span>Join Key:</span><br><br>"+dataPak+"<br><br><span><button onclick=''>Reroll</button></span>";
     document.getElementById("settings").innerHTML += settingsPacket;
   }
 });
