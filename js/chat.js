@@ -105,7 +105,7 @@ socket.on('connected', function(data){
 });
 
 socket.on('err', function(data){
-  document.getElementByID('err').innerHTML = data;
+  document.getElementById('err').innerHTML = data;
 });
 
 socket.on('message', function(data){
