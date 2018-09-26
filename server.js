@@ -258,7 +258,7 @@ io.on('connection', function(socket){
       // mebbe add encryption
       senderName = users[socket.id].name;
       senderName = senderName.split('>').join('&gt;').split('<').join('&lt;');
-      senderNamePacket = "<a href='javascript:void(0);' onclick=''>"+senderName+"</a>"
+      senderNamePacket = "<a class='name' href='javascript:void(0);' onclick=''>"+senderName+"</a>"
 
       data = data.split('>').join('&gt;').split('<').join('&lt;'); // lol
       packet = '[' + senderNamePacket + '] ' + data;
