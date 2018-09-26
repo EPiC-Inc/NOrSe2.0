@@ -107,7 +107,10 @@ socket.on('settings confirm', function(data){
   if (data[0] == 1) {
     document.getElementById("settings").innerHTML += "<br><span>"+data[1]+"</span>";
   } else {
-    // format settings, put them in settings div
+    // format settings, put them in settings 
+    dataPak = data[1];
+    settingsPacket = "<span>Join Code:</span><br>"+dataPak+"<br><br><button onclick=''>";
+    document.getElementById("settings").innerHTML += settingsPacket;
   }
 });
 
