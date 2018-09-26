@@ -30,6 +30,7 @@ function closeNav() {
   document.getElementById("users").style.right = "-255px";
   document.getElementById("settings").style.right = "-255px";
   document.getElementById("rooms").style.right = "-255px";
+  document.getElementById("join_room").style.right = "-255px";
 }
 
 function getCookie(cname) {
