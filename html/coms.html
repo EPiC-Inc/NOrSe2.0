@@ -26,6 +26,14 @@
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <br><span>Your rooms:</span><br>
     </div>
+    
+    <div id="join_room" class="sidenav sidenav-right">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <br><span>Join a Room</span><br>
+      <form style='margin-left:0px;padding-left:0px;' onsubmit='return false;'>
+        <input type='text' style='width:185px;' />
+      </form>
+    </div>
 
     <div id="users" class="sidenav sidenav-right">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -37,7 +45,7 @@
       <br><span style='font-size:48px;'>Menu:</span>
 
       <a href='./newroom.html'>Create a Room</a>
-      <a href='javascript:void(0)' onclick=''>Join a Room</a>
+      <a href='javascript:void(0)' onclick='closeNav();openJoin();'>Join a Room</a>
       <a href='javascript:void(0)' onclick='closeNav();openUsers();'>Users Online</a>
       <a href='javascript:void(0)' onclick='closeNav();openRooms();'>Your Rooms</a>
       <a href='javascript:void(0)' onclick='closeNav();openSettings();'>Room Settings</a>
