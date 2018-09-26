@@ -155,7 +155,7 @@ io.on('connection', function(socket){
       userRoom = rooms[users[socket.id].room]
       if (userRoom.owner == users[socket.id].name) {
         // allow access
-        rep = '{error}'
+        rep = roomKeys;
         for (key in roomKeys) {
           if (roomKeys[key] == users[socket.id].room) {
             rep = key;
