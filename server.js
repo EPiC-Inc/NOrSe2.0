@@ -176,6 +176,17 @@ io.on('connection', function(socket){
     }
   });
 
+  socket.on('get users', function(){
+    currentRoom = users[socket.id].room;
+    rep = [];
+    for (id in users){
+      if (users[id].room == currentRoom) {
+        rep.push(users[id].name);
+      }
+    }
+    io.to(socket.id).emit('users online', rep);
+  });
+
   socket.on('room settings', function(){
     if (users[socket.id] && users[socket.id].room && rooms[users[socket.id].room]) {
       userRoom = rooms[users[socket.id].room]
