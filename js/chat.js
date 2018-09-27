@@ -78,7 +78,7 @@ if (getCookie("username")) {
   username = getCookie("username");
   document.getElementById('username').innerHTML = username;
   password = getCookie("key");
-  //socket.emit('auth', [username, password]);
+  socket.emit('subauth', [username, password]);
 } else {
   window.location.replace("/login.html");
 }
@@ -115,6 +115,10 @@ socket.on('err', function(data){
 socket.on('message', function(data){
   $("#msgs").append("<div class='msg'>"+data+"</div>");
   window.scrollTo(0,document.body.scrollHeight);
+});
+
+socket.on('return to whence you came', function(){
+  window.location.replace("/login.html");
 });
 
 socket.on('settings confirm', function(data){
