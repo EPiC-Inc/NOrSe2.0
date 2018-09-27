@@ -248,6 +248,9 @@ io.on('connection', function(socket){
     if (!(roomname && rooms[roomname])) {
       // haha error catching
     } else {
+      if (users[socket.id].room) {
+        socket.leave(users[socket.id].room);
+      }
       users[socket.id].name = username;
       users[socket.id].room = roomname;
       socket.join(roomname);
