@@ -33,6 +33,8 @@ var rmCookie = function(name) {
 };
 
 function newAccount() {
+  rmCookie('username');
+  rmCookie('key');
   if (user.value.includes(" ")) {
     errors.innerHTML = "Error: No spaces allowed in username!"
   }
