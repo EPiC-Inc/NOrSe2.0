@@ -21,6 +21,7 @@ function openSettings() {
   document.getElementById("settings").style.right = "0";
 }
 function openRooms() {
+  socket.emit('get rooms', username);
   document.getElementById("rooms").style.right = "0";
 }
 function openJoin() {
@@ -82,8 +83,6 @@ if (getCookie("username")) {
   window.location.replace("/login.html");
 }
 
-socket.emit('get rooms', username);
-
 socket.emit('join', [username, 'lobby']);
 
 socket.on('user rooms', function(data){
@@ -119,7 +118,7 @@ socket.on('settings confirm', function(data){
   if (data[0] == 1) {
     document.getElementById("settings").innerHTML += "<br><span>"+data[1]+"</span>";
   } else {
-    // format settings, put them in settings 
+    // format settings, put them in settings
     dataPak = data[1];
     settingsPacket1 = "<br><span>Room:</span>"+roomname+"</span><br><br>";
     settingsPacket2 = "<span>Join Key:</span><br><br><span>"+dataPak+"</span><br><br><button onclick='socket.emit(\"reroll room key\");'>Reroll</button>";

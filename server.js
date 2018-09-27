@@ -171,7 +171,7 @@ io.on('connection', function(socket){
       io.to(socket.id).emit('settings confirm', [1, "Sorry, You don't appear to be in a room!"]);
     }
   });
-  
+
   socket.on('reroll room key', function(){
     if (users[socket.id] && users[socket.id].room && rooms[users[socket.id].room]) {
       userRoom = rooms[users[socket.id].room]
@@ -195,7 +195,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('add room', function(data){
-    if (users[socket.id] && users[socket.id].name) {
+    if (users[socket.id] && users[socket.id].name && ! (users[socket.id].name == configs.superuser)) {
       username = users[socket.id].name;
       roomUID = roomKeys[data];
       if (roomUID) {
