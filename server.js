@@ -34,14 +34,14 @@ function saveJSON(filename, data, successCallback=function(){}, failCallback=fun
 // Save a message to a room
 function saveMessage(msg, room='lobby') {
   if (rooms[room]) {
-    roomMsgs = rooms[room]['messages'];
+    roomMsgs = rooms[room].messages;
     if (roomMsgs.length > 20) {
       roomMsgs.push(msg);
     } else {
       roomMsgs.splice(0, 1);
       roomMsgs.push(msg);
     }
-    saveJSON('rooms.json', rooms);
+    //saveJSON('rooms.json', rooms);
   }
 }
 
@@ -250,7 +250,7 @@ io.on('connection', function(socket){
       users[socket.id].name = username;
       users[socket.id].room = roomname;
       socket.join(roomname);
-      io.to(socket.id).emit('connected', [rooms[roomname].name, roomname]);
+      io.to(socket.id).emit('connected', [rooms[roomname].name, roomname, rooms[roomname].messages]);
     }
   });
 
@@ -305,6 +305,7 @@ io.on('connection', function(socket){
       data = data.split('>').join('&gt;').split('<').join('&lt;'); // lol
       packet = '[' + senderNamePacket + '] ' + data;
       io.to(users[socket.id].room).emit('message', packet);
+      saveMessage(packet, users[socket.id].room);
     }
   });
 });

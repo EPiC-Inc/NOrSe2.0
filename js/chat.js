@@ -97,7 +97,12 @@ socket.on('user rooms', function(data){
 socket.on('connected', function(data){
   roomname = data[0];
   roomid = data[1];
+  pastmsgs = data[2];
   document.getElementById('msgs').innerHTML = '';
+  for (i in pastmsgs) {
+    $("#msgs").append("<div class='msg'>"+pastmsgs[i]+"</div>");
+  }
+  window.scrollTo(0,document.body.scrollHeight);
   console.log('connected to '+data);
   document.getElementById('roomname').innerHTML = roomname;
   document.getElementById('roomid').innerHTML = roomid;
@@ -113,7 +118,7 @@ socket.on('message', function(data){
 });
 
 socket.on('settings confirm', function(data){
-  console.log(data);
+  //console.log(data);
   document.getElementById("settings").innerHTML = '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br><span style="font-size:40px;">Settings:</span><br>'
   if (data[0] == 1) {
     document.getElementById("settings").innerHTML += "<br><span>"+data[1]+"</span>";
