@@ -232,6 +232,7 @@ io.on('connection', function(socket){
       "name":roomname,
       "owner":username
     };
+
     roomKeys[roomKey] = roomUID;
     authList[username].rooms.push(roomUID);
     saveJSON('rooms.json', rooms);
