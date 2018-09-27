@@ -131,6 +131,32 @@ io.on('connection', function(socket){
     }
   });
 
+  socket.on('subauth', function(data){
+    /*console.log(data);
+    console.log(authList);*/
+    user = data[0];
+    pass = data[1];
+    for (stored_user in authList) {
+      //console.log(stored_user, user);
+      if (stored_user.toLowerCase() == user.toLowerCase()) {
+        user = stored_user;
+      }
+    }
+    if (authList[user] && authList[user]['password'] == pass) {
+      io.to(socket.id).emit('a-ok', user);
+    } else if (authList[user]) {
+      io.to(socket.id).emit('return to whence you came');
+    } else if(user.toLowerCase() == configs.superuser.toLowerCase()) {
+      if (pass == configs.superuserpassword) {
+        io.to(socket.id).emit('a-ok', configs.superuser);
+      } else {
+        io.to(socket.id).emit('return to whence you came');
+      }
+    } else {
+      io.to(socket.id).emit('return to whence you came');
+    }
+  });
+
   socket.on('get rooms', function(data){
     if (authList[data]) {
       rep = [];
