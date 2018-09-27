@@ -86,10 +86,11 @@ if (getCookie("username")) {
 socket.emit('join', [username, 'lobby']);
 
 socket.on('user rooms', function(data){
+  document.getElementById('rooms').innerHTML = '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br><span>Your rooms:</span><br>'
   for (i in data) {
     room = data[i];
     buttonPacket = roomButton1 + username + roomButton2 + room[0] + roomButton3 + room[1] + roomButton4 + "<br>";
-    $("#rooms").append(buttonPacket);
+    document.getElementById('rooms').innerHTML += buttonPacket;
     console.log(buttonPacket);
   }
 });
