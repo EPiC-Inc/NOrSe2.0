@@ -224,7 +224,7 @@ io.on('connection', function(socket){
           roomKey = Math.random().toString(36).substring(2, 8);
         }
         roomKeys[roomKey] = users[socket.id].room;
-        saveJSON('invite_codes.json', roomKeys);
+        saveJSON('/config/invite_codes.json', roomKeys);
         io.to(socket.id).emit('settings confirm', [0, [roomKey]]);//todo
       }
     }
@@ -237,7 +237,7 @@ io.on('connection', function(socket){
       if (roomUID) {
         if (! authList[username].rooms.includes(roomUID)) {
           authList[username].rooms.push(roomUID);
-          saveJSON('users.json', authList);
+          saveJSON('/config/users.json', authList);
           io.to(socket.id).emit('err', "<span style='color:blue'>Success!</span>");
         } else {
           io.to(socket.id).emit('err', "Already joined");
@@ -271,9 +271,9 @@ io.on('connection', function(socket){
 
     roomKeys[roomKey] = roomUID;
     authList[username].rooms.push(roomUID);
-    saveJSON('rooms.json', rooms);
-    saveJSON('invite_codes.json', roomKeys);
-    saveJSON('users.json', authList);
+    saveJSON('/config/rooms.json', rooms);
+    saveJSON('/config/invite_codes.json', roomKeys);
+    saveJSON('/config/users.json', authList);
     io.to(socket.id).emit('a-ok');
   });
 
@@ -326,7 +326,7 @@ io.on('connection', function(socket){
           'nameStyle':'',
           'rooms':['lobby']
         }
-        saveJSON('users.json', authList);
+        saveJSON('/config/users.json', authList);
         io.to(socket.id).emit('a-ok', user)
       }
     } else {

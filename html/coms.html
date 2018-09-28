@@ -3,72 +3,27 @@
 <head>
   <script src='/js/jquery.js'></script>
   <script src='/js/socket.io.js'></script>
+	<script src='/js/bootstrap.min.js'></script>
+	<script src='/js/popper.min.js'></script>
+ 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link href='/css/bootstrap.min.css' rel='stylesheet' />
+  <link href='/css/default.css' id='theme' rel='stylesheet'>
   <link rel="shortcut icon" type="image/png" href="/img/favicon.png"/>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link href='./css/core.css' rel='stylesheet'>
-  <link href='./css/dark.css' id='theme' rel='stylesheet'>
-  <title>NOS2</title>
+  <title>NOS :: Chat</title>
 </head>
 
 <body>
-  <header>
-    <!--<button onclick="openUsers();">Users</button>-->
-    <button onclick="openMenu();" class='right' style='padding:0px;margin-right:140px;'><i class="material-icons" style="font-size:39px;">settings</i></button>
-    <span>Username : <span id='username'></span></span>
-
-    <!--<button onclick="openRooms();" class="right" style='margin-right:128px;'>Rooms</button>-->
-    <button onclick='logout();' class='right'>Log Out</button>
-  </header>
-
-
-  <div id="content">
-    <div id="rooms" class="sidenav sidenav-right">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <br><span>Your rooms:</span><br>
-    </div>
-    
-    <div id="join_room" class="sidenav sidenav-right">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <br><span>Join a Room</span><br><br>
-      <form style='margin-left:0px;padding-left:0px;' onsubmit='return false;'>
-        <input type='text' id='roomkey' style='width:90px;' maxlength="6" /><br><br>
-        <button onclick='joinRoom();'>Join</button><br><br>
-      </form>
-      <span id='err' style='color:red'></span>
-    </div>
-
-    <div id="users" class="sidenav sidenav-right">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <br><span>Users online:</span><br>
-    </div>
-
-    <div id="other_stuff" class="sidenav sidenav-right">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <br><span style='font-size:48px;'>Menu:</span>
-
-      <a href='./newroom.html'>Create a Room</a>
-      <a href='javascript:void(0)' onclick='closeNav();openJoin();'>Join a Room</a>
-      <a href='javascript:void(0)' onclick='closeNav();openUsers();'>Users Online</a>
-      <a href='javascript:void(0)' onclick='closeNav();openRooms();'>Your Rooms</a>
-      <a href='javascript:void(0)' onclick='closeNav();openSettings();'>Room Settings</a>
-      <span><a href='./settings.html'>Account Settings</a></span>
-    </div>
-
-    <div id="settings" class="sidenav sidenav-right">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    </div>
-
-    <div id='msgs'>
-    </div>
-
-    <form id='msgForm' onsubmit="return false">
-      <input id='msgSender' autocomplete="off" autofocus /><button onclick="sendMsg()">Send</button>
-    </form><br>
-    <span style='position:fixed;bottom:0;font-height:8px'>Connected to <span id='roomname'>Lobby</span> | <span id='roomid'>lobby</span></span>
-  </div>
+  <div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12 topbar-coms">
+				<i onclick="logout()" class="material-icons topbar-button">power_settings_new</i>
+ 				<i onclick="openMenu()" class="material-icons topbar-button">settings</i>
+				<span class="topbar-span">Username: <span id='username'></span></span><br>
+				<span class="topbar-span">Room: <span id="room"></span></span>
+			</div>
+		</div>
+	</div>
 </body>
 
-<script src='/js/themechanger.js'></script>
-<script src='/js/includehtml.js'></script>
 <script src='/js/chat.js'></script>
 </html>
