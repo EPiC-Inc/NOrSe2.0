@@ -3,10 +3,10 @@
 <head>
   <script src='/js/jquery.js'></script>
   <script src='/js/socket.io.js'></script>
-	<script src='/js/bootstrap.min.js'></script>
-	<script src='/js/popper.min.js'></script>
- 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link href='/css/bootstrap.min.css' rel='stylesheet' />
+  <script src='/js/bootstrap.min.js'></script>
+  <script src='/js/popper.min.js'></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href='/css/bootstrap.min.css' rel='stylesheet' />
   <link href='/css/default.css' id='theme' rel='stylesheet'>
   <link rel="shortcut icon" type="image/png" href="/img/favicon.png"/>
   <title>NOS :: Chat</title>
@@ -19,9 +19,18 @@
 				<i onclick="logout()" class="material-icons topbar-button">power_settings_new</i>
  				<i onclick="openMenu()" class="material-icons topbar-button">settings</i>
 				<span class="topbar-span">Username: <span id='username'></span></span><br>
-				<span class="topbar-span">Room: <span id="room"></span></span>
+				<span class="topbar-span">Room: <span id="roomname"></span></span>
 			</div>
 		</div>
+    <div class=row">
+      <div class="col-sm-12" id="msgs">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <input id="msgSender" autocomplete="off" autofocus />
+      </div>
+    </div>
 	</div>
 </body>
 

@@ -3,6 +3,7 @@
 body {	
 	background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.6) 100%), url('/img/bg.jpg') no-repeat center center fixed;
 	background-size: cover;
+    font-family: 'Titillium Web', sans-serif;
 }
 .topbar-coms {
 	background-color: rgba(0,0,0,0.5);
@@ -23,6 +24,28 @@ body {
 	color: silver;
 	margin-left: 1em;
 	float: left;
+}
+.atombtn {
+    position: relative;
+    width: 5em;
+    color: #78FFCD;
+    border: .15em solid #78FFCD;
+    border-radius: 5;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.3em;
+    line-height: 2em;
+    cursor: pointer;
+    bottom: 0;
+    left: 0;
+}
+#msgSender {
+    bottom: 0;
+    border: 1px solid gray;
+    border-radius: 5px;
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    width: 90vw;
 }
 
 /* Login Page CSS */
