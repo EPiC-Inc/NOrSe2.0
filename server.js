@@ -9,11 +9,10 @@ var stdin = process.openStdin();
 /// End dependencies
 
 /// Variables
-var commands = require('./commands.js');
-var authList = require('./users.json');
-var rooms = require('./rooms.json');
-var configs = require('./configs.json');
-var roomKeys = require('./invite_codes.json');
+var authList = require('./config/users.json');
+var rooms = require('./config/rooms.json');
+var configs = require('./config/configs.json');
+var roomKeys = require('./config/invite_codes.json');
 
 var users = {};
 /// End vars
