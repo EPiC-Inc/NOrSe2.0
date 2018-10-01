@@ -4,6 +4,7 @@ var msgSender = document.getElementById('msgSender');
 var username = '';
 var roomname = '';
 var online = true;
+var alertWaiting = false;
 
 var roomButton1 = '<button style=\'margin-top:8px;\' onclick=\'socket.emit("join", ["' // + username
 var roomButton2 = '", "' // + room ID
