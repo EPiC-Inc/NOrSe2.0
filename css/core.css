@@ -85,6 +85,10 @@ header .right {
   margin-left: 32px;
 }
 
+.sidenav div {
+  margin-left: 0px;
+}
+
 .sidenav-left {
   left: -250px;
 }
