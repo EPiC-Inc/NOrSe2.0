@@ -42,7 +42,7 @@ function changeIco(ref) {
     var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
     link.type = 'image/x-icon';
     link.rel = 'shortcut icon';
-    link.href = 'img/'+ref;
+    link.href = './img/'+ref;
     document.getElementsByTagName('head')[0].appendChild(link);
 }
 // See if the page is visible (for favicon changing)
