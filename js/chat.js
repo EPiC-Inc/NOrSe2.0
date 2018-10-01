@@ -116,7 +116,7 @@ socket.emit('join', [username, 'lobby']);
 
 // Callbacks
 vis(function(){
-    if (vis()) {changeIco('/static/favicon.png');
+    if (vis()) {changeIco('favicon.png');
                 alertWaiting = false;}
     //changeIco(vis() ? '/static/favicon.png' : '/static/alert.png');
 });
@@ -151,11 +151,11 @@ socket.on('err', function(data){
 
 socket.on('message', function(data){
   if (!alertWaiting) {
-    if (!vis()) {changeIco('/static/msg.png');}
+    if (!vis()) {changeIco('msg.png');}
   }
   start = "<div class='msg'>";
   if (data.includes('@'+username) || data.includes('@everyone')) {
-    if (!vis()) {changeIco('/static/alert.png');}
+    if (!vis()) {changeIco('alert.png');}
     alertWaiting = true;
     start = '<div class="alert msg">';
   }
@@ -194,7 +194,7 @@ socket.on("disconnect", function(reason){
     online = false;
     $("#msgs").append("<div class='msg'>! Connection terminated. !</div>");
     window.scrollTo(0,document.body.scrollHeight);
-  	//changeIco('/static/disconnect.png');
+  	changeIco('disconnect.png');
     document.getElementById('roomname').innerHTML = '-';
     document.getElementById('roomid').innerHTML = 'disconnected';
     console.log(reason);
