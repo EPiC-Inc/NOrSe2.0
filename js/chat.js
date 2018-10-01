@@ -14,24 +14,25 @@ function openMenu() {
   document.getElementById("other_stuff").style.right = '0';
 }
 function openUsers() {
-  document.getElementById("users").style.right = "0";
+  socket.emit('get users');
+  document.getElementById("usersNav").style.right = "0";
 }
 function openSettings() {
   socket.emit('room settings');
-  document.getElementById("settings").style.right = "0";
+  document.getElementById("settingsNav").style.right = "0";
 }
 function openRooms() {
   socket.emit('get rooms', username);
-  document.getElementById("rooms").style.right = "0";
+  document.getElementById("roomsNav").style.right = "0";
 }
 function openJoin() {
   document.getElementById("join_room").style.right = "0";
 }
 function closeNav() {
   document.getElementById("other_stuff").style.right = '-255px';
-  document.getElementById("users").style.right = "-255px";
-  document.getElementById("settings").style.right = "-255px";
-  document.getElementById("rooms").style.right = "-255px";
+  document.getElementById("usersNav").style.right = "-255px";
+  document.getElementById("settingsNav").style.right = "-255px";
+  document.getElementById("roomsNav").style.right = "-255px";
   document.getElementById("join_room").style.right = "-255px";
   document.getElementById("msgSender").focus();
 }
@@ -86,7 +87,7 @@ if (getCookie("username")) {
 socket.emit('join', [username, 'lobby']);
 
 socket.on('user rooms', function(data){
-  document.getElementById('rooms').innerHTML = '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br><span>Your rooms:</span><br>'
+  document.getElementById('rooms').innerHTML = ''
   for (i in data) {
     room = data[i];
     buttonPacket = roomButton1 + username + roomButton2 + room[0] + roomButton3 + room[1] + roomButton4 + "<br>";
@@ -122,9 +123,16 @@ socket.on('return to whence you came', function(){
   window.location.replace("/login.html");
 });
 
+socket.on('users online', function(data){
+  for (i in data) {
+    tempUser = data[i];
+    
+  }
+});
+
 socket.on('settings confirm', function(data){
   //console.log(data);
-  document.getElementById("settings").innerHTML = '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br><span style="font-size:40px;">Settings:</span><br>'
+  document.getElementById("settings").innerHTML = ''
   if (data[0] == 1) {
     document.getElementById("settings").innerHTML += "<br><span>"+data[1]+"</span>";
   } else {
