@@ -44,6 +44,10 @@ header .right {
   right: 2%;
 }
 
+.msg {
+  word-break: break-all;
+}
+
 #msgForm {
   bottom: 0;
   margin-bottom: 16px;
