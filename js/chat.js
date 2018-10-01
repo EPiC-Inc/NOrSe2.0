@@ -126,7 +126,7 @@ socket.on('return to whence you came', function(){
 socket.on('users online', function(data){
   for (i in data) {
     tempUser = data[i];
-    
+    $("#users").append("<a href='javascript:void(0);' onclick='document.getElementById(\"msgSender\").value += \"@"+data+" \";closeNav();'>"+data+"</a><br>");
   }
 });
 
