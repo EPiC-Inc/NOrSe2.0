@@ -113,6 +113,13 @@ if (getCookie("username")) {
 
 socket.emit('join', [username, 'lobby']);
 
+// Callbacks
+vis(function(){
+    if (vis()) {changeIco('/static/favicon.png');
+                alertWaiting = false;}
+    //changeIco(vis() ? '/static/favicon.png' : '/static/alert.png');
+});
+
 socket.on('user rooms', function(data){
   document.getElementById('rooms').innerHTML = ''
   for (i in data) {
@@ -142,6 +149,9 @@ socket.on('err', function(data){
 });
 
 socket.on('message', function(data){
+  if (!alertWaiting) {
+    if (!vis()) {changeIco('/static/msg.png');}
+  }
   start = "<div class='msg'>";
   if (data.includes('@'+username) || data.includes('@everyone')) {
     if (!vis()) {changeIco('/static/alert.png');}
