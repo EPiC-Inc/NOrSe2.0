@@ -35,7 +35,7 @@ function saveJSON(filename, data, successCallback=function(){}, failCallback=fun
 function saveMessage(msg, room='lobby') {
   if (rooms[room]) {
     roomMsgs = rooms[room].messages;
-    if (roomMsgs.length < 20) {
+    if (roomMsgs.length < 40) {
       roomMsgs.push(msg);
     } else {
       roomMsgs.splice(0, 1);
