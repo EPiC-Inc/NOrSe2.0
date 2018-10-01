@@ -37,6 +37,14 @@ function closeNav() {
   document.getElementById("msgSender").focus();
 }
 
+function changeIco(ref) {
+    var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    link.type = 'image/x-icon';
+    link.rel = 'shortcut icon';
+    link.href = 'img/'+ref;
+    document.getElementsByTagName('head')[0].appendChild(link);
+}
+
 function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
@@ -115,7 +123,13 @@ socket.on('err', function(data){
 });
 
 socket.on('message', function(data){
-  $("#msgs").append("<div class='msg'>"+data+"</div>");
+  start = "<div class='msg'>";
+  if (data.includes('@'+username) || data.includes('@everyone')) {
+    if (!vis()) {changeIco('/static/alert.png');}
+    alertWaiting = true;
+    start = '<div class="alert msg">';
+  }
+  $("#msgs").append(start+data+"</div>");
   window.scrollTo(0,document.body.scrollHeight);
 });
 
@@ -127,7 +141,7 @@ socket.on('users online', function(data){
   document.getElementById('users').innerHTML = '';
   for (i in data) {
     tempUser = data[i];
-    $("#users").append("<a href='javascript:void(0);' onclick='document.getElementById(\"msgSender\").value += \"@"+tempUser+" \";closeNav();'>"+tempUser+"</a><br>");
+    $("#users").append("<a href='javascript:void(0);' onclick='document.getElementById(\"msgSender\").value += \"@"+tempUser+"\";closeNav();'>"+tempUser+"</a><br>");
   }
 });
 
