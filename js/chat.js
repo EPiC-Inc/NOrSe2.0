@@ -112,6 +112,7 @@ if (getCookie("username")) {
   window.location.replace("/login.html");
 }
 
+changeIco('disconnect.png');
 socket.emit('join', [username, 'lobby']);
 
 // Callbacks
@@ -141,6 +142,7 @@ socket.on('connected', function(data){
   }
   window.scrollTo(0,document.body.scrollHeight);
   console.log('connected to '+data);
+  changeIco('favicon.png');
   document.getElementById('roomname').innerHTML = roomname;
   document.getElementById('roomid').innerHTML = roomid;
 });
@@ -171,7 +173,7 @@ socket.on('users online', function(data){
   document.getElementById('users').innerHTML = '';
   for (i in data) {
     tempUser = data[i];
-    $("#users").append("<a href='javascript:void(0);' onclick='document.getElementById(\"msgSender\").value += \"@"+tempUser+"\";closeNav();'>"+tempUser+"</a><br>");
+    $("#users").append("<a style='margin-top:4px;' href='javascript:void(0);' onclick='document.getElementById(\"msgSender\").value += \"@"+tempUser+"\";closeNav();'>"+tempUser+"</a><br>");
   }
 });
 
