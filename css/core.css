@@ -85,18 +85,6 @@ header .right {
   margin-left: 32px;
 }
 
-.sidenav div {
-  margin-left: 0px;
-}
-
-.sidenav-left {
-  left: -250px;
-}
-
-.sidenav-right {
-  right: -250px;
-}
-
 .sidenav a {
   padding: 8px 8px 8px 16px;
   font-size: 25px;
@@ -110,4 +98,16 @@ header .right {
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
+}
+
+.sidenav div {
+  margin-left: 0px;
+}
+
+.sidenav-left {
+  left: -250px;
+}
+
+.sidenav-right {
+  right: -250px;
 }
