@@ -173,7 +173,7 @@ socket.on('users online', function(data){
   document.getElementById('users').innerHTML = '';
   for (i in data) {
     tempUser = data[i];
-    $("#users").append("<a style='margin-top:4px;' href='javascript:void(0);' onclick='document.getElementById(\"msgSender\").value += \"@"+tempUser+"\";closeNav();'>"+tempUser+"</a><br>");
+    $("#users").append("<a style='padding-top:4px;' href='javascript:void(0);' onclick='document.getElementById(\"msgSender\").value += \"@"+tempUser+"\";closeNav();'>"+tempUser+"</a><br>");
   }
 });
 
