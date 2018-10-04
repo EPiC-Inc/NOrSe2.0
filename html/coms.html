@@ -23,22 +23,25 @@
 
   <div id="content">
     <div id="roomsNav" class="sidenav sidenav-right">
+      <a href="javascript:void(0)" class="backbtn" onclick="closeNav();openMenu()">←</a>
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <br><span>Your rooms:</span><br>
       <div id='rooms'></div>
     </div>
-    
+
     <div id="join_room" class="sidenav sidenav-right">
+      <a href="javascript:void(0)" class="backbtn" onclick="closeNav();openMenu()">←</a>
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <br><span>Join a Room</span><br><br>
       <form style='margin-left:0px;padding-left:0px;' onsubmit='return false;'>
-        <input type='text' id='roomkey' style='width:90px;' maxlength="6" /><br><br>
+        <input type='text' id='roomkey' style='width:90px;' maxlength="10" /><br><br>
         <button onclick='joinRoom();'>Join</button><br><br>
       </form>
       <span id='err' style='color:red'></span>
     </div>
 
     <div id="usersNav" class="sidenav sidenav-right">
+      <a href="javascript:void(0)" class="backbtn" onclick="closeNav();openMenu()">←</a>
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <br><span>Users online:</span><br>
       <div id='users'></div>
@@ -48,17 +51,32 @@
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <br><span style='font-size:48px;'>Menu:</span>
 
-      <a href='./newroom.html'>Create a Room</a>
+      <div>
+      <a href='javascript:void(0)' onclick='closeNav();openCreate();'>Create a Room</a>
       <a href='javascript:void(0)' onclick='closeNav();openJoin();'>Join a Room</a>
       <a href='javascript:void(0)' onclick='closeNav();openUsers();'>Users Online</a>
       <a href='javascript:void(0)' onclick='closeNav();openRooms();'>Your Rooms</a>
       <a href='javascript:void(0)' onclick='closeNav();openSettings();'>Room Settings</a>
       <span><a href='./settings.html'>Account Settings</a></span>
+      </div>
     </div>
 
     <div id="settingsNav" class="sidenav sidenav-right">
+      <a href="javascript:void(0)" class="backbtn" onclick="closeNav();openMenu()">←</a>
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <div id='settings'></div>
+    </div>
+
+    <div id="createNav" class="sidenav sidenav-right">
+      <a href="javascript:void(0)" class="backbtn" onclick="closeNav();openMenu()">←</a>
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <div id='creator'>
+        <br><span>Room name:</span><br>
+        <form style='margin-left:0px;padding-left:0px;' onsubmit='return false;'>
+          <input type='text' style='width:160px;' id='createRoomName' /><br><br>
+          <button onclick="createRoom();">Create Room</button>
+        </form>
+      </div>
     </div>
 
     <div id='msgs'>

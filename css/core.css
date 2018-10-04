@@ -92,6 +92,14 @@ header .right {
   transition: 0.3s;
 }
 
+.sidenav .backbtn {
+  position: absolute;
+  top: 0;
+  left: -16px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
 .sidenav .closebtn {
   position: absolute;
   top: 0;

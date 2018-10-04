@@ -8,7 +8,7 @@ var alertWaiting = false;
 
 var roomButton1 = '<button style=\'margin-top:8px;\' onclick=\'socket.emit("join", ["' // + username
 var roomButton2 = '", "' // + room ID
-var roomButton3 = '"]);closeNav();\'>' // + room name
+var roomButton3 = '"]);\'>' // + room name
 var roomButton4 = '</button>'
 
 function openMenu() {
@@ -29,13 +29,36 @@ function openRooms() {
 function openJoin() {
   document.getElementById("join_room").style.right = "0";
 }
+function openCreate() {
+  document.getElementById("createNav").style.right = "0";
+}
 function closeNav() {
   document.getElementById("other_stuff").style.right = '-255px';
   document.getElementById("usersNav").style.right = "-255px";
   document.getElementById("settingsNav").style.right = "-255px";
   document.getElementById("roomsNav").style.right = "-255px";
   document.getElementById("join_room").style.right = "-255px";
+  document.getElementById("createNav").style.right = "-255px";
   document.getElementById("msgSender").focus();
+}
+
+function createRoom() {
+  roomName = document.getElementById('createRoomName').value;
+  socket.emit('new room', [username, roomName]);
+}
+
+function formatMessage(msg) {
+  if (!alertWaiting) {
+    if (!vis()) {changeIco('msg.png');}
+  }
+  start = "<div class='msg'>";
+  if (msg.includes('@'+username) || msg.includes('@everyone')) {
+    if (!vis()) {changeIco('alert.png');}
+    alertWaiting = true;
+    start = '<div class="alert msg">';
+  }
+  msg = cUrl(msg);
+  $("#msgs").append(start+msg+"</div>");
 }
 
 function cUrl(str) {
@@ -140,12 +163,13 @@ socket.on('user rooms', function(data){
 });
 
 socket.on('connected', function(data){
+  closeNav();
   roomname = data[0];
   roomid = data[1];
   pastmsgs = data[2];
   document.getElementById('msgs').innerHTML = '';
   for (i in pastmsgs) {
-    $("#msgs").append("<div class='msg'>"+pastmsgs[i]+"</div>");
+    formatMessage(pastmsgs[i]);
   }
   window.scrollTo(0,document.body.scrollHeight);
   console.log('connected to '+data);
@@ -159,17 +183,7 @@ socket.on('err', function(data){
 });
 
 socket.on('message', function(data){
-  if (!alertWaiting) {
-    if (!vis()) {changeIco('msg.png');}
-  }
-  start = "<div class='msg'>";
-  if (data.includes('@'+username) || data.includes('@everyone')) {
-    if (!vis()) {changeIco('alert.png');}
-    alertWaiting = true;
-    start = '<div class="alert msg">';
-  }
-  data = cUrl(data);
-  $("#msgs").append(start+data+"</div>");
+  data=formatMessage(data);
   window.scrollTo(0,document.body.scrollHeight);
 });
 

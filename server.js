@@ -7,7 +7,6 @@ var url = require('url');
 var fs = require('fs');
 var stdin = process.openStdin();
 /// End dependencies
-
 /// Variables
 var commands = require('./commands.js');
 var authList = require('./users.json');
@@ -232,6 +231,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('add room', function(data){
+    {
     if (users[socket.id] && users[socket.id].name && ! (users[socket.id].name == configs.superuser)) {
       username = users[socket.id].name;
       roomUID = roomKeys[data];
@@ -240,6 +240,12 @@ io.on('connection', function(socket){
           authList[username].rooms.push(roomUID);
           saveJSON('users.json', authList);
           io.to(socket.id).emit('err', "<span style='color:blue'>Success!</span>");
+          if (users[socket.id].room) {
+            socket.leave(users[socket.id].room);
+          }
+          users[socket.id].room = roomUID;
+          socket.join(roomUID);
+          io.to(socket.id).emit('connected', [rooms[roomUID].name, roomUID, rooms[roomUID].messages]);
         } else {
           io.to(socket.id).emit('err', "Already joined");
         }
@@ -248,6 +254,7 @@ io.on('connection', function(socket){
       }
     } else {
       io.to(socket.id).emit('err', "{error}");
+    }
     }
   });
 
@@ -271,11 +278,18 @@ io.on('connection', function(socket){
     };
 
     roomKeys[roomKey] = roomUID;
-    authList[username].rooms.push(roomUID);
+    if (username !== configs.superuser) {
+      authList[username].rooms.push(roomUID);
+    }
     saveJSON('rooms.json', rooms);
     saveJSON('invite_codes.json', roomKeys);
     saveJSON('users.json', authList);
-    io.to(socket.id).emit('a-ok');
+    if (users[socket.id].room) {
+      socket.leave(users[socket.id].room);
+    }
+    users[socket.id].room = roomUID;
+    socket.join(roomUID);
+    io.to(socket.id).emit('connected', [rooms[roomUID].name, roomUID, rooms[roomUID].messages]);
   });
 
   socket.on('join', function(data){
@@ -332,6 +346,36 @@ io.on('connection', function(socket){
       }
     } else {
       io.to(socket.id).emit('err', '>.>');
+    }
+  });
+
+  socket.on('password change', function(data){
+    user = data[0];
+    oldPass = data[1];
+    newPass = data[2];
+    if (authList[user] && authList[user].password == oldPass) {
+      authList[user].password = newPass;
+      io.to(socket.id).emit('err', "<span style='color:blue;'>Password Changed!</span>");
+      io.to(socket.id).emit('a-ok');
+      saveJSON('users.json', authList);
+    } else {
+      io.to(socket.id).emit('err', 'Either you don\'t exist or your old password is incorrect.');
+    }
+  });
+
+  socket.on('username change', function(data){
+    oldUser = data[0];
+    newUser = data[1];
+    if (authList[oldUser] && !(authList[newUser])) {
+      authList[newUser] = authList[oldUser];
+      delete authList[oldUser];
+      io.to(socket.id).emit('err', "<span style='color:blue;'>Username Changed!</span>");
+      io.to(socket.id).emit('a-ok');
+      saveJSON('users.json', authList);
+    } else if (authList[newUser]) {
+      io.to(socket.id).emit('err', "That username's already been taken.");
+    } else {
+      io.to(socket.id).emit('err', "an error occured");
     }
   });
 
