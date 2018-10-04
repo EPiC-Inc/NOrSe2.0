@@ -32,6 +32,10 @@ function openJoin() {
 function openCreate() {
   document.getElementById("createNav").style.right = "0";
 }
+function openUser(userToShow) {
+  socket.emit('get profile', userToShow);
+  document.getElementById("profileNav").style.right = "0";
+}
 function closeNav() {
   document.getElementById("other_stuff").style.right = '-255px';
   document.getElementById("usersNav").style.right = "-255px";
@@ -211,6 +215,10 @@ socket.on('settings confirm', function(data){
     settingsPacket2 = "<span>Join Key:</span><br><br><span>"+dataPak+"</span><br><br><button onclick='socket.emit(\"reroll room key\");'>Reroll</button>";
     document.getElementById("settings").innerHTML += settingsPacket1 + settingsPacket2;
   }
+});
+
+socket.on('user profile', function(data){
+  document.getElementById("profile").innerHTML = data;
 });
 
 socket.on("disconnect", function(reason){
