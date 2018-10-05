@@ -392,8 +392,8 @@ io.on('connection', function(socket){
 
       data = data.split('>').join('&gt;').split('<').join('&lt;'); // lol
       packet = {
-        sender = senderName,
-        contents = data
+        sender: senderName,
+        contents: data
       };
       io.to(users[socket.id].room).emit('message', packet);
       saveMessage(packet, users[socket.id].room);
