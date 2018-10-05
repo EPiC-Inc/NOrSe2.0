@@ -43,6 +43,7 @@ function closeNav() {
   document.getElementById("roomsNav").style.right = "-255px";
   document.getElementById("join_room").style.right = "-255px";
   document.getElementById("createNav").style.right = "-255px";
+  document.getElementById("profileNav").style.right = "-255px";
   document.getElementById("msgSender").focus();
 }
 
@@ -51,7 +52,8 @@ function createRoom() {
   socket.emit('new room', [username, roomName]);
 }
 
-function formatMessage(msg) {
+function formatMessage(packet) {
+  msg = "[<a class='name' href='javascript:void(0);' onclick='openUser(\""+packet.sender+"\")'>"+packet.sender+'</a>] '+packet.content;
   if (!alertWaiting) {
     if (!vis()) {changeIco('msg.png');}
   }
@@ -126,7 +128,7 @@ function joinRoom() {
 
 function sendMsg(msg) {
   if (msgSender.value.trim() !== '') {
-    socket.emit('message', msgSender.value);
+    socket.emit('message', msgSender.value.substring(0, 200));
     msgSender.value = '';
   }
 }
@@ -187,7 +189,7 @@ socket.on('err', function(data){
 });
 
 socket.on('message', function(data){
-  data=formatMessage(data);
+  formatMessage(data);
   window.scrollTo(0,document.body.scrollHeight);
 });
 

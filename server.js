@@ -379,16 +379,22 @@ io.on('connection', function(socket){
     }
   });
 
+  socket.on('get profile', function(data){
+    socket.emit('user profile');
+  });
+
   /// MESSAGES
   socket.on('message', function(data){
     if (users[socket.id] && users[socket.id].room) {
       // mebbe add encryption
       senderName = users[socket.id].name;
       senderName = senderName.split('>').join('&gt;').split('<').join('&lt;');
-      senderNamePacket = "<a class='name' href='javascript:void(0);' onclick=''>"+senderName+"</a>"
 
       data = data.split('>').join('&gt;').split('<').join('&lt;'); // lol
-      packet = '[' + senderNamePacket + '] ' + data;
+      packet = {
+        sender = senderName,
+        contents = data
+      };
       io.to(users[socket.id].room).emit('message', packet);
       saveMessage(packet, users[socket.id].room);
     }
