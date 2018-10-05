@@ -10,7 +10,7 @@ This is the second rendition of the original chat client Novus Ordo Seclorum. Fe
 Node.js:
 * `sudo apt-get install nodejs`
 Express, Socket.io, and the sanitize-html packages:
-* `npm install --save express socket.io sanitize-html`
+* `npm install --save express socket.io pg`
 
 ## Downloading:
 `git clone https://github.com/EPiC-Inc/NOrSe.git`
