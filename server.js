@@ -430,7 +430,7 @@ io.on('connection', function(socket){
       if (senderName == configs.superuser) {
         senderRank = 4;
       } else if (rooms[users[socket.id].room].owner == senderName) {
-        senderRank = 3;
+        senderRank = 2;
       } else {
         senderRank = authList[senderName].role;
       }
