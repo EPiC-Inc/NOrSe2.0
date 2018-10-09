@@ -53,7 +53,17 @@ function createRoom() {
 }
 
 function formatMessage(packet) {
-  msg = "[<a class='name' href='javascript:void(0);' onclick='openUser(\""+packet.sender+"\")'>"+packet.sender+'</a>] '+packet.content;
+  msgIcon = '';
+  if (packet.rank == 4) {
+    msgIcon = '<img src="img/superuser.png">';
+  } else if (packet.rank == 3) {
+    msgIcon = '<img src="img/admin.png">';
+  } else if (packet.rank == 2) {
+    msgIcon = '<img src="img/dev.png">';
+  } else if (packet.rank == 1) {
+    msgIcon = '<img src="img/helper.png">'
+  }
+  msg = "["+msgIcon+"<a class='name' href='javascript:void(0);' onclick='openUser(\""+packet.sender+"\")'>"+packet.sender+'</a>] '+packet.content;
   if (!alertWaiting) {
     if (!vis()) {changeIco('msg.png');}
   }
