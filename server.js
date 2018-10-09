@@ -416,9 +416,13 @@ io.on('connection', function(socket){
       rep = {
         uName: uData.name,
         uRole: uData.role
-      }
+      };
     }
-    socket.emit('user profile', [authList[users[socket.id].name].role, rep]);
+    if (authList[users[socket.id].name] == configs.superuser) {
+      selfRole = 4;
+    } else {
+      selfRole = authList[users[socket.id].name].role;
+    socket.emit('user profile', [selfRole, rep]);
   });
 
   /// MESSAGES
