@@ -232,7 +232,7 @@ socket.on('settings confirm', function(data){
 socket.on('user profile', function(data){
   selfRole = data[0];
   data = data[1];
-  profilePacket = "<span>Username: "+data.uName+"</span><br><br>";
+  profilePacket = "<span>Username:</span><br><span>"+data.uName+"</span><br><br>";
   document.getElementById("profile").innerHTML = profilePacket;
 });
 
