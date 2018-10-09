@@ -211,7 +211,7 @@ socket.on('users online', function(data){
   document.getElementById('users').innerHTML = '';
   for (i in data) {
     tempUser = data[i];
-    $("#users").append("<a style='padding-top:4px;' href='javascript:void(0);' onclick='document.getElementById(\"msgSender\").value += \"@"+tempUser+"\";closeNav();'>"+tempUser+"</a><br>");
+    $("#users").append("<a style='padding-top:4px;padding-bottom:4px;' href='javascript:void(0);' onclick='document.getElementById(\"msgSender\").value += \"@"+tempUser+"\";closeNav();'>"+tempUser+"</a><br>");
   }
 });
 
@@ -230,7 +230,7 @@ socket.on('settings confirm', function(data){
 });
 
 socket.on('user profile', function(data){
-	profilePacket = "
+  profilePacket = "<span>Username: "+data.uName+"</span><br><br>";
   document.getElementById("profile").innerHTML = data;
 });
 
