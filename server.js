@@ -442,7 +442,3 @@ http.listen(port, function(){
 // test
 console.log(queryDB('select * from Users'));
 /// And that's it.
-
-process.on('uncaughtException', function (err) {
-    console.log(err);
-}); //aaaa
