@@ -138,7 +138,7 @@ function joinRoom() {
 
 function sendMsg(msg) {
   if (msgSender.value.trim() !== '') {
-    socket.emit('message', msgSender.value.substring(0, 200));
+    socket.emit('message', msgSender.value.substring(0, 500));
     msgSender.value = '';
   }
 }
