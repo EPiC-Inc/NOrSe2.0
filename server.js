@@ -422,6 +422,7 @@ io.on('connection', function(socket){
       selfRole = 4;
     } else {
       selfRole = authList[users[socket.id].name].role;
+    }
     socket.emit('user profile', [selfRole, rep]);
   });
 
