@@ -233,7 +233,8 @@ socket.on('user profile', function(data){
   selfRole = data[0];
   data = data[1];
   profilePacket = "<span>Username:</span><br><span>"+data.uName+"</span><br><br>";
-  
+
+  console.log(selfRole);
   if (selfRole == 2 || selfRole == 3 || selfRole == 4) { /* if you're admin or dev or superuser */
     profilePacket += "<span>Actions:</span><br>";
     profilePacket += "<a href='javascript:void(0);' onclick=''>Promote</a><br>";
