@@ -414,11 +414,11 @@ io.on('connection', function(socket){
     } else if (authList[data]) {
       uData = authList[data];
       rep = {
-        uName: uData.name,
+        uName: data,
         uRole: uData.role
       };
     }
-    if (authList[users[socket.id].name] == configs.superuser) {
+    if (users[socket.id].name == configs.superuser) {
       selfRole = 4;
     } else {
       selfRole = authList[users[socket.id].name].role;
