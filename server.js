@@ -363,7 +363,7 @@ io.on('connection', function(socket){
         authList[user] = {
           'password':pass,
           'nameStyle':'',
-          'role':0, /* 0 = normal users, 1 = helper, 2 = dev, 3 = admin (note: 4 would be superuser but only one acct can have it) */
+          'role':0, /* 0 = normal users, 1 = helper, 2 = admin, 3 = dev (note: 4 would be superuser but only one acct can have it) */
           'rooms':['lobby']
         }
         saveJSON('users.json', authList);
