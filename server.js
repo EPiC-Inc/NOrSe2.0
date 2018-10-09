@@ -417,8 +417,8 @@ io.on('connection', function(socket){
         uName: uData.name,
         uRole: uData.role
       }
-      socket.emit('user profile', [authList[users[socket.id].name].role, rep]);
     }
+    socket.emit('user profile', [authList[users[socket.id].name].role, rep]);
   });
 
   /// MESSAGES
