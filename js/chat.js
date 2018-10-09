@@ -230,6 +230,7 @@ socket.on('settings confirm', function(data){
 });
 
 socket.on('user profile', function(data){
+	profilePacket = "
   document.getElementById("profile").innerHTML = data;
 });
 
