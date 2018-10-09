@@ -6,6 +6,7 @@ var io = require('socket.io')(http);
 var url = require('url');
 var fs = require('fs');
 var stdin = process.openStdin();
+const { Client } = require('pg'); // for the database
 /// End dependencies
 /// Variables
 var commands = require('./commands.js');
@@ -14,10 +15,32 @@ var rooms = require('./rooms.json');
 var configs = require('./configs.json');
 var roomKeys = require('./invite_codes.json');
 
+// create a db connection client
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+
 var users = {};
 /// End vars
 
 /// Functions
+// Send a query to the database
+function queryDB(command) {
+  client.connect();
+
+  client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+    rep = 'error';
+    if (err) {console.log("database error: "+err);res = {rows:[]};};
+    for (let row of res.rows) {
+      console.log(JSON.stringify(row));
+    }
+    rep = res.rows;
+    client.end();
+  });
+  return rep;
+}
+
 // Save a json object to a file
 function saveJSON(filename, data, successCallback=function(){}, failCallback=function(){console.log('error writing to file')}) {
   var content = JSON.stringify(data);
@@ -414,4 +437,7 @@ io.on('connection', function(socket){
 http.listen(port, function(){
   console.log('Listening on port:'+port);
 });
+
+// test
+console.log(queryDB('select * from Users'));
 /// And that's it.
