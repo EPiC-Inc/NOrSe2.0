@@ -26,19 +26,20 @@ var users = {};
 
 /// Functions
 // Send a query to the database
+global.dbrep = '';
 function queryDB(command) {
   client.connect();
 
   client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-    rep = 'error';
+    dbrep = 'error';
     if (err) {console.log("database error: "+err);res = {rows:[]};};
     for (let row of res.rows) {
       console.log(JSON.stringify(row));
     }
-    rep = res.rows;
+    dbrep = res.rows;
     client.end();
   });
-  return rep;
+  return dbrep;
 }
 
 // Save a json object to a file
