@@ -57,9 +57,9 @@ function formatMessage(packet) {
   if (packet.rank == 4) {
     msgIcon = '<img src="img/superuser.png">';
   } else if (packet.rank == 3) {
-    msgIcon = '<img src="img/admin.png">';
-  } else if (packet.rank == 2) {
     msgIcon = '<img src="img/dev.png">';
+  } else if (packet.rank == 2) {
+    msgIcon = '<img src="img/admin.png">';
   } else if (packet.rank == 1) {
     msgIcon = '<img src="img/helper.png">'
   }
