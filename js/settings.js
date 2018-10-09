@@ -29,11 +29,19 @@ function getCookie(cname) {
 }
 
 function changeUser() {
-  socket.emit('username change', [username, userNameChange.value]);
+  if (userNameChange.value.includes(" ")) {
+    document.getElementById('err').innerHTML = 'Username can\'t contain any spaces!';
+  } else if (userNameChange.value == '') {
+    document.getElementById('err').innerHTML = 'Username can\'t be blank!';
+  } else {
+    socket.emit('username change', [username, userNameChange.value]);
+  }
 }
 
 function changePassword() {
-  if (passwordChange.value === passwordConfirm.value) {
+  if (passwordChange.value == '') {
+    document.getElementById('err').innerHTML = 'New password cannot be blank!';
+  } else if (passwordChange.value === passwordConfirm.value) {
     socket.emit('password change', [username, hashCode(passwordOld.value), hashCode(passwordChange.value)]);
   } else {
     document.getElementById('err').innerHTML = 'Chosen passwords must match';
