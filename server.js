@@ -390,10 +390,15 @@ io.on('connection', function(socket){
       // mebbe add encryption
       senderName = users[socket.id].name;
       senderName = senderName.split('>').join('&gt;').split('<').join('&lt;');
+      if (senderName == configs.superuser) {
+        senderRank = 4;
+      } else {
+        senderRank = authList[senderName].role;
+      }
 
       data = data.split('>').join('&gt;').split('<').join('&lt;'); // lol
       packet = {
-        rank: authList[senderName].role,
+        rank: senderRank,
         sender: senderName,
         content: data
       };
