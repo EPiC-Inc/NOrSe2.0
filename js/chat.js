@@ -231,7 +231,7 @@ socket.on('settings confirm', function(data){
 
 socket.on('user profile', function(data){
   profilePacket = "<span>Username: "+data.uName+"</span><br><br>";
-  document.getElementById("profile").innerHTML = data;
+  document.getElementById("profile").innerHTML = profilePacket;
 });
 
 socket.on("disconnect", function(reason){
