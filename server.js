@@ -405,7 +405,19 @@ io.on('connection', function(socket){
   });
 
   socket.on('get profile', function(data){
-    socket.emit('user profile');
+    rep = 'error';
+    if (data == configs.superuser) {
+      rep = {
+        uName: configs.superuser,
+        uRole: 4
+      };
+    } else if (authList[data]) {
+      uData = authList[data];
+      rep = {
+        uName: uData.name,
+        uRole: uData.role
+      }
+    socket.emit('user profile', [authList[users[socket.id].name].role, rep]);
   });
 
   /// MESSAGES
