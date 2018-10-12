@@ -20,51 +20,22 @@
     <h2 style='color:red;' id='err'></h2>
     <form onsubmit="return false;">
       <h2>Desired username</h2>
-      <input type='text' id='new_username' /> <button onclick=''>Change Username</button><br><br><br>
+      <input type='text' id='new_username' /> <button onclick='changeUser();'>Change Username</button><br><br><br>
+    </form>
 
+    <form onsubmit="return false;">
       <h2>Old password</h2>
       <input type='password' id='old_password' /><br><br>
       <h2>New password</h2>
       <input type='password' id='new_password' /><br><br>
       <h2>Retype password</h2>
       <input type='password' id='new_password_confirm' /><br><br>
-      <button onclick=''>Change Password</button>
+      <button onclick='changePassword();'>Change Password</button>
     </form>
   </div>
 </body>
 
 <script src='/js/themechanger.js'></script>
 <script src='/js/includehtml.js'></script>
-<script>
-// cos i'm too lazy to do an external script
-var socket = io();
-var username = '';
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-if (getCookie("username")) {
-  username = getCookie("username");
-  document.getElementById('username').innerHTML = username;
-} else {
-  window.location.replace("/login.html");
-}
-
-socket.on('a-ok', function(){
-  //stuff
-});
-</script>
+<script src='/js/settings.js'></script>
 </html>

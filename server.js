@@ -6,18 +6,42 @@ var io = require('socket.io')(http);
 var url = require('url');
 var fs = require('fs');
 var stdin = process.openStdin();
+const { Client } = require('pg'); // for the database
 /// End dependencies
-
 /// Variables
+var commands = require('./config/commands.js');
 var authList = require('./config/users.json');
 var rooms = require('./config/rooms.json');
 var configs = require('./config/configs.json');
 var roomKeys = require('./config/invite_codes.json');
 
+// create a db connection client
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+
 var users = {};
 /// End vars
 
 /// Functions
+// Send a query to the database
+global.dbrep = '';
+function queryDB(command) {
+  client.connect();
+
+  client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+    dbrep = 'error';
+    if (err) {console.log("database error: "+err);res = {rows:[]};};
+    for (let row of res.rows) {
+      console.log(JSON.stringify(row));
+    }
+    dbrep = res.rows;
+    client.end();
+  });
+  return dbrep;
+}
+
 // Save a json object to a file
 function saveJSON(filename, data, successCallback=function(){}, failCallback=function(){console.log('error writing to file')}) {
   var content = JSON.stringify(data);
@@ -34,13 +58,12 @@ function saveJSON(filename, data, successCallback=function(){}, failCallback=fun
 function saveMessage(msg, room='lobby') {
   if (rooms[room]) {
     roomMsgs = rooms[room].messages;
-    if (roomMsgs.length < 20) {
+    if (roomMsgs.length < 40) {
       roomMsgs.push(msg);
     } else {
       roomMsgs.splice(0, 1);
       roomMsgs.push(msg);
     }
-    //saveJSON('rooms.json', rooms);
   }
 }
 
@@ -224,21 +247,28 @@ io.on('connection', function(socket){
           roomKey = Math.random().toString(36).substring(2, 8);
         }
         roomKeys[roomKey] = users[socket.id].room;
-        saveJSON('/config/invite_codes.json', roomKeys);
+        saveJSON('invite_codes.json', roomKeys);
         io.to(socket.id).emit('settings confirm', [0, [roomKey]]);//todo
       }
     }
   });
 
   socket.on('add room', function(data){
+    {
     if (users[socket.id] && users[socket.id].name && ! (users[socket.id].name == configs.superuser)) {
       username = users[socket.id].name;
       roomUID = roomKeys[data];
       if (roomUID) {
         if (! authList[username].rooms.includes(roomUID)) {
           authList[username].rooms.push(roomUID);
-          saveJSON('/config/users.json', authList);
+          saveJSON('users.json', authList);
           io.to(socket.id).emit('err', "<span style='color:blue'>Success!</span>");
+          if (users[socket.id].room) {
+            socket.leave(users[socket.id].room);
+          }
+          users[socket.id].room = roomUID;
+          socket.join(roomUID);
+          io.to(socket.id).emit('connected', [rooms[roomUID].name, roomUID, rooms[roomUID].messages]);
         } else {
           io.to(socket.id).emit('err', "Already joined");
         }
@@ -247,6 +277,7 @@ io.on('connection', function(socket){
       }
     } else {
       io.to(socket.id).emit('err', "{error}");
+    }
     }
   });
 
@@ -270,11 +301,18 @@ io.on('connection', function(socket){
     };
 
     roomKeys[roomKey] = roomUID;
-    authList[username].rooms.push(roomUID);
-    saveJSON('/config/rooms.json', rooms);
-    saveJSON('/config/invite_codes.json', roomKeys);
-    saveJSON('/config/users.json', authList);
-    io.to(socket.id).emit('a-ok');
+    if (username !== configs.superuser) {
+      authList[username].rooms.push(roomUID);
+    }
+    saveJSON('rooms.json', rooms);
+    saveJSON('invite_codes.json', roomKeys);
+    saveJSON('users.json', authList);
+    if (users[socket.id].room) {
+      socket.leave(users[socket.id].room);
+    }
+    users[socket.id].room = roomUID;
+    socket.join(roomUID);
+    io.to(socket.id).emit('connected', [rooms[roomUID].name, roomUID, rooms[roomUID].messages]);
   });
 
   socket.on('join', function(data){
@@ -324,14 +362,67 @@ io.on('connection', function(socket){
         authList[user] = {
           'password':pass,
           'nameStyle':'',
+          'role':0, /* 0 = normal users, 1 = helper, 2 = admin, 3 = dev (note: 4 would be superuser but only one acct can have it) */
           'rooms':['lobby']
         }
-        saveJSON('/config/users.json', authList);
+        saveJSON('users.json', authList);
         io.to(socket.id).emit('a-ok', user)
       }
     } else {
       io.to(socket.id).emit('err', '>.>');
     }
+  });
+
+  socket.on('password change', function(data){
+    user = data[0];
+    oldPass = data[1];
+    newPass = data[2];
+    if (authList[user] && authList[user].password == oldPass) {
+      authList[user].password = newPass;
+      io.to(socket.id).emit('err', "<span style='color:blue;'>Password Changed!</span>");
+      io.to(socket.id).emit('a-ok');
+      saveJSON('users.json', authList);
+    } else {
+      io.to(socket.id).emit('err', 'Either you don\'t exist or your old password is incorrect.');
+    }
+  });
+
+  socket.on('username change', function(data){
+    oldUser = data[0];
+    newUser = data[1];
+    if (authList[oldUser] && !(authList[newUser])) {
+      authList[newUser] = authList[oldUser];
+      delete authList[oldUser];
+      io.to(socket.id).emit('err', "<span style='color:blue;'>Username Changed!</span>");
+      io.to(socket.id).emit('a-ok');
+      saveJSON('users.json', authList);
+    } else if (authList[newUser]) {
+      io.to(socket.id).emit('err', "That username's already been taken.");
+    } else {
+      io.to(socket.id).emit('err', "an error occured");
+    }
+  });
+
+  socket.on('get profile', function(data){
+    rep = 'error';
+    if (data == configs.superuser) {
+      rep = {
+        uName: configs.superuser,
+        uRole: 4
+      };
+    } else if (authList[data]) {
+      uData = authList[data];
+      rep = {
+        uName: data,
+        uRole: uData.role
+      };
+    }
+    if (users[socket.id].name == configs.superuser) {
+      selfRole = 4;
+    } else {
+      selfRole = authList[users[socket.id].name].role;
+    }
+    socket.emit('user profile', [selfRole, rep]);
   });
 
   /// MESSAGES
@@ -340,10 +431,20 @@ io.on('connection', function(socket){
       // mebbe add encryption
       senderName = users[socket.id].name;
       senderName = senderName.split('>').join('&gt;').split('<').join('&lt;');
-      senderNamePacket = "<a class='name' href='javascript:void(0);' onclick=''>"+senderName+"</a>"
+      if (senderName == configs.superuser) {
+        senderRank = 4;
+      } else if (rooms[users[socket.id].room].owner == senderName) {
+        senderRank = 2;
+      } else {
+        senderRank = authList[senderName].role;
+      }
 
       data = data.split('>').join('&gt;').split('<').join('&lt;'); // lol
-      packet = '[' + senderNamePacket + '] ' + data;
+      packet = {
+        rank: senderRank,
+        sender: senderName,
+        content: data
+      };
       io.to(users[socket.id].room).emit('message', packet);
       saveMessage(packet, users[socket.id].room);
     }
@@ -356,4 +457,7 @@ io.on('connection', function(socket){
 http.listen(port, function(){
   console.log('Listening on port:'+port);
 });
+
+// test
+console.log(queryDB('select * from Users'));
 /// And that's it.
