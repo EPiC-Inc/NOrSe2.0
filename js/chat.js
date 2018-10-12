@@ -36,6 +36,9 @@ function openUser(userToShow) {
   socket.emit('get profile', userToShow);
   document.getElementById("profileNav").style.right = "0";
 }
+function openLogs() {
+  socket.emit('get logs');
+}
 function closeNav() {
   document.getElementById("other_stuff").style.right = '-255px';
   document.getElementById("usersNav").style.right = "-255px";
@@ -163,8 +166,8 @@ socket.emit('join', [username, 'lobby']);
 
 // Callbacks
 vis(function(){
-    if (vis()) {changeIco('favicon.png');
-                alertWaiting = false;}
+  if (vis()) {changeIco('favicon.png');
+    alertWaiting = false;}
     //changeIco(vis() ? '/static/favicon.png' : '/static/alert.png');
 });
 
