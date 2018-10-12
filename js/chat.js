@@ -85,30 +85,30 @@ function cUrl(str) {
 }
 
 function changeIco(ref) {
-    var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-    link.type = 'image/x-icon';
-    link.rel = 'shortcut icon';
-    link.href = './img/'+ref;
-    document.getElementsByTagName('head')[0].appendChild(link);
+  var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+  link.type = 'image/x-icon';
+  link.rel = 'shortcut icon';
+  link.href = './img/'+ref;
+  document.getElementsByTagName('head')[0].appendChild(link);
 }
 // See if the page is visible (for favicon changing)
 var vis = (function(){
-    var stateKey, eventKey, keys = {
-        hidden: "visibilitychange",
-        webkitHidden: "webkitvisibilitychange",
-        mozHidden: "mozvisibilitychange",
-        msHidden: "msvisibilitychange"
-    };
-    for (stateKey in keys) {
-        if (stateKey in document) {
-            eventKey = keys[stateKey];
-            break;
-        }
-    }
-    return function(c) {
-        if (c) document.addEventListener(eventKey, c);
-        return !document[stateKey];
-    }
+  var stateKey, eventKey, keys = {
+    hidden: "visibilitychange",
+    webkitHidden: "webkitvisibilitychange",
+    mozHidden: "mozvisibilitychange",
+    msHidden: "msvisibilitychange"
+  };
+  for (stateKey in keys) {
+    if (stateKey in document) {
+      eventKey = keys[stateKey];
+        break;
+      }
+  }
+  return function(c) {
+    if (c) document.addEventListener(eventKey, c);
+    return !document[stateKey];
+  }
 })();
 
 function getCookie(cname) {
@@ -211,7 +211,7 @@ socket.on('users online', function(data){
   document.getElementById('users').innerHTML = '';
   for (i in data) {
     tempUser = data[i];
-    $("#users").append("<a style='padding-top:4px;padding-bottom:4px;' href='javascript:void(0);' onclick='document.getElementById(\"msgSender\").value += \"@"+tempUser+"\";closeNav();'>"+tempUser+"</a><br>");
+    $("#users").append("<a style='padding-top:4px;padding-bottom:4px;' href='javascript:void(0);' onclick='openUser("+tempUser+")'>"+tempUser+"</a><br>");
   }
 });
 
@@ -235,6 +235,7 @@ socket.on('user profile', function(data){
   profilePacket = "<span>Username:</span><br><span>"+data.uName+"</span><br><br>";
 	profilePacket += "<span>Actions:</span><br>";
   profilePacket += "<a href='javascript:void(0);' onclick=''>Send message</a><br>";
+  profilePacket += "<a href='javascript:void(0);' onclick=''>Ignore</a><br>";
 
   console.log(selfRole);
   if (selfRole == 2 || selfRole == 3 || selfRole == 4) { /* if you're admin or dev or superuser */
