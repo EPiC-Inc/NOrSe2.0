@@ -11,43 +11,8 @@ var roomButton2 = '", "' // + room ID
 var roomButton3 = '"]);\'>' // + room name
 var roomButton4 = '</button>'
 
-function openMenu() {
-  document.getElementById("other_stuff").style.right = '0';
-}
-function openUsers() {
-  socket.emit('get users');
-  document.getElementById("usersNav").style.right = "0";
-}
-function openSettings() {
-  socket.emit('room settings');
-  document.getElementById("settingsNav").style.right = "0";
-}
-function openRooms() {
-  socket.emit('get rooms', username);
-  document.getElementById("roomsNav").style.right = "0";
-}
-function openJoin() {
-  document.getElementById("join_room").style.right = "0";
-}
-function openCreate() {
-  document.getElementById("createNav").style.right = "0";
-}
-function openUser(userToShow) {
-  socket.emit('get profile', userToShow);
-  document.getElementById("profileNav").style.right = "0";
-}
 function openLogs() {
   socket.emit('get logs');
-}
-function closeNav() {
-  document.getElementById("other_stuff").style.right = '-255px';
-  document.getElementById("usersNav").style.right = "-255px";
-  document.getElementById("settingsNav").style.right = "-255px";
-  document.getElementById("roomsNav").style.right = "-255px";
-  document.getElementById("join_room").style.right = "-255px";
-  document.getElementById("createNav").style.right = "-255px";
-  document.getElementById("profileNav").style.right = "-255px";
-  document.getElementById("msgSender").focus();
 }
 
 function createRoom() {
@@ -149,15 +114,6 @@ function sendMsg(msg) {
 function logout() {
   rmCookie('username');
   rmCookie('key');
-  window.location.replace("/index.html");
-}
-
-if (getCookie("username")) {
-  username = getCookie("username");
-  document.getElementById('username').innerHTML = username;
-  password = getCookie("key");
-  socket.emit('subauth', [username, password]);
-} else {
   window.location.replace("/login.html");
 }
 
@@ -182,9 +138,8 @@ socket.on('user rooms', function(data){
 });
 
 socket.on('connected', function(data){
-  closeNav();
   roomname = data[0];
-  roomid = data[1];
+  // roomid = data[1]; (superfluous?)
   pastmsgs = data[2];
   document.getElementById('msgs').innerHTML = '';
   for (i in pastmsgs) {
@@ -194,7 +149,7 @@ socket.on('connected', function(data){
   console.log('connected to '+data);
   changeIco('favicon.png');
   document.getElementById('roomname').innerHTML = roomname;
-  document.getElementById('roomid').innerHTML = roomid;
+  // document.getElementById('roomid').innerHTML = roomid;
 });
 
 socket.on('err', function(data){
@@ -256,7 +211,7 @@ socket.on("disconnect", function(reason){
     window.scrollTo(0,document.body.scrollHeight);
   	changeIco('disconnect.png');
     document.getElementById('roomname').innerHTML = '-';
-    document.getElementById('roomid').innerHTML = 'disconnected';
+		// document.getElementById('roomid').innerHTML = '-';
     console.log(reason);
   }
 });
@@ -293,30 +248,68 @@ if (newTheme) {
 
 function includeHTML() {
   var z, i, elmnt, file, xhttp;
-  /*loop through a collection of all HTML elements:*/
-  z = document.getElementsByTagName("*"); /*could be more efficient?*/
+  //loop through a collection of all HTML elements:
+  z = document.getElementsByTagName("*"); //could be more efficient?
   for (i = 0; i < z.length; i++) {
     elmnt = z[i];
-    /*search for elements with a certain atrribute:*/
+    //search for elements with a certain atrribute:
     file = elmnt.getAttribute("includes");
     if (file) {
-      /*make an HTTP request using the attribute value as the file name:*/
+      //make an HTTP request using the attribute value as the file name:
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4) {
           if (this.status == 200) {elmnt.innerHTML = this.responseText;}
           if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
-          /*remove the attribute, and call this function once more:*/
-          /*if the 'includes' attribute is not removed, it runs forever*/
+          //remove the attribute, and call this function once more:
+          //if the 'includes' attribute is not removed, it runs forever
           elmnt.removeAttribute("includes");
           includeHTML();
         }
       }
       xhttp.open("GET", file, true);
       xhttp.send();
-      /*exit the function:*/
+      //exit the function:
       return;
     }
   }
 }
 includeHTML();
+
+// Room Creation
+
+function addRoom() {
+	var username = '';
+	var roomNameElement = document.getElementById('roomname');
+  roomName = roomNameElement.value;
+  socket.emit('new room', [username, roomName]);
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+/*
+if (getCookie("username")) {
+	var username = '';
+  username = getCookie("username");
+} else {
+  window.location.replace("/login.html");
+}
+*/
+
+socket.on('a-ok', function(){
+  window.location.replace("/coms.html");
+});

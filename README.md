@@ -7,13 +7,16 @@ This is the second rendition of the original chat client Novus Ordo Seclorum. Fe
 * A theme changing system
 
 ## Requirements:
-Node.js:
-* `sudo apt-get install nodejs`
+Node.js & postgresql:
+* `sudo apt-get install nodejs postgresql` 
 Express, Socket.io, and the sanitize-html packages:
-* `npm install --save express socket.io sanitize-html`
+* `npm install --save express socket.io sanitize-html pg`
 
 ## Downloading:
 `git clone https://github.com/EPiC-Inc/NOrSe.git`
+
+## Setting up postgres:
+Follow [this guide] (https://www.techrepublic.com/blog/diy-it-guy/diy-a-postgresql-database-server-setup-anyone-can-handle/) to setup postgressql for your users
 
 ## Starting the Server
 1). Create the file `users.json` if it does not yet already exist
@@ -29,3 +32,4 @@ Express, Socket.io, and the sanitize-html packages:
 * Implement Webamp (https://github.com/captbaritone/webamp)
 * Implement commands and 'song request' features to ytdl songs
 * Possible 'Resistance' media server (:
+* Redo the POSTGRES system... a direct environment variable is not the answer!!

@@ -9,7 +9,6 @@ var stdin = process.openStdin();
 const { Client } = require('pg'); // for the database
 /// End dependencies
 /// Variables
-var commands = require('./config/commands.js');
 var authList = require('./config/users.json');
 var rooms = require('./config/rooms.json');
 var configs = require('./config/configs.json');
@@ -17,7 +16,7 @@ var roomKeys = require('./config/invite_codes.json');
 
 // create a db connection client
 const client = new Client({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: 'postgres://jdzniefywfaqlt:8654246568879b767ebceb3b4662565e4c81c0f722f089f67e3592de0135855e@ec2-54-227-244-12.compute-1.amazonaws.com:5432/d280nrhuj4lm1v', //process.env.DATABASE_URL,
   ssl: true,
 });
 
@@ -29,6 +28,7 @@ var users = {};
 global.dbrep = '';
 function queryDB(command) {
   client.connect();
+  console.dir(process.env.DATABASE_URL)
 
   client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
     dbrep = 'error';
@@ -45,7 +45,7 @@ function queryDB(command) {
 // Save a json object to a file
 function saveJSON(filename, data, successCallback=function(){}, failCallback=function(){console.log('error writing to file')}) {
   var content = JSON.stringify(data);
-  fs.writeFile(filename, content, 'utf8', function (err) {
+  fs.writeFile(__dirname + '/configs/' + filename, content, 'utf8', function (err) {
     if (err) {
       failCallback();
     } else {
@@ -102,16 +102,12 @@ app.use('/', express.static(__dirname + '/html'));
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/js', express.static(__dirname + '/js'));
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/html/index.html');
+  res.sendFile(__dirname + '/html/login.html');
 });
 
-app.get('/googleb7532997be74f84b.html', function(req, res){
-  res.sendFile(__dirname + '/googleb7532997be74f84b.html');
-});
-
-app.use(function(req, res) {
-  res.sendFile(__dirname + '/html/404.html', 404);
-});
+//app.use(function(req, res) {
+//  res.sendFile(__dirname + '/html/login.html', 404);
+//});
 /// End routing
 
 /// Socketio events

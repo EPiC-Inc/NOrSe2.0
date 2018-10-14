@@ -39,6 +39,10 @@ body {
     bottom: 0;
     left: 0;
 }
+.msgSenderDiv {
+	position: fixed;
+	bottom: 0;
+}
 #msgSender {
     bottom: 0;
     border: 1px solid gray;
