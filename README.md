@@ -9,7 +9,7 @@ This is the second rendition of the original chat client Novus Ordo Seclorum. Fe
 ## Requirements:
 Node.js:
 * `sudo apt-get install nodejs`
-Express, Socket.io, and the sanitize-html packages:
+Express, Socket.io, and the postgresql packages:
 * `npm install --save express socket.io pg`
 
 ## Downloading:
