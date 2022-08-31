@@ -5,8 +5,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var url = require('url');
 var fs = require('fs');
-var stdin = process.openStdin();
-const { Client } = require('pg'); // for the database
+var stdin = process.openStdin();f
+//const { Client } = require('pg'); // for the database
 /// End dependencies
 /// Variables
 var commands = require('./commands.js');
@@ -16,16 +16,19 @@ var configs = require('./configs.json');
 var roomKeys = require('./invite_codes.json');
 
 // create a db connection client
+/*
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
 });
+*/
 
 var users = {};
 /// End vars
 
 /// Functions
 // Send a query to the database
+/*
 global.dbrep = '';
 function queryDB(command) {
   client.connect();
@@ -40,7 +43,7 @@ function queryDB(command) {
     client.end();
   });
   return dbrep;
-}
+}*/
 
 // Save a json object to a file
 function saveJSON(filename, data, successCallback=function(){}, failCallback=function(){console.log('error writing to file')}) {
@@ -460,5 +463,5 @@ http.listen(port, function(){
 });
 
 // test
-console.log(queryDB('select * from Users'));
+//console.log(queryDB('select * from Users'));
 /// And that's it.
