@@ -5,7 +5,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var url = require('url');
 var fs = require('fs');
-var stdin = process.openStdin();f
+var stdin = process.openStdin();
 //const { Client } = require('pg'); // for the database
 /// End dependencies
 /// Variables
